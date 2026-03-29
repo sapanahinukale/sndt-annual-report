@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SNDT — Login</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1a1f2e; --accent: #4f6ef7; --success: #22c98a;
+      --danger: #e85a5a; --border: #e2e6f0; --muted: #6b7399; --bg: #f0f2f8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      background-image: radial-gradient(circle at 20% 20%, rgba(79,110,247,0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(79,110,247,0.06) 0%, transparent 50%);
+    }
+    .login-wrap {
+      background: #fff; border-radius: 20px; padding: 44px 40px;
+      width: 100%; max-width: 420px;
+      box-shadow: 0 8px 40px rgba(26,31,46,0.12);
+      border: 1px solid var(--border);
+    }
+    .logo-row { text-align: center; margin-bottom: 28px; }
+    .logo-circle {
+      width: 56px; height: 56px; background: var(--primary); border-radius: 16px;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; color: #fff; margin-bottom: 14px;
+      box-shadow: 0 4px 16px rgba(26,31,46,0.2);
+    }
+    .logo-row h1 { font-family: 'Playfair Display', serif; font-size: 1.35rem; color: var(--primary); margin-bottom: 4px; }
+    .logo-row p { font-size: 0.80rem; color: var(--muted); }
+
+    .field { margin-bottom: 18px; }
+    .field label { display: block; font-size: 0.80rem; font-weight: 600; color: var(--primary); margin-bottom: 6px; }
+    .field input {
+      width: 100%; padding: 11px 14px; border: 1.5px solid var(--border); border-radius: 10px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.90rem; background: #fff; color: var(--primary);
+      transition: all 0.17s; outline: none;
+    }
+    .field input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(79,110,247,0.10); }
+    .pw-wrap { position: relative; }
+    .pw-wrap input { padding-right: 40px; }
+    .pw-eye { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--muted); cursor: pointer; font-size: 0.9rem; padding: 4px; }
+
+    .btn-login {
+      width: 100%; padding: 12px; background: var(--accent); color: #fff; border: none;
+      border-radius: 11px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px;
+      box-shadow: 0 3px 12px rgba(79,110,247,0.3); margin-top: 6px;
+    }
+    .btn-login:hover { background: #3b5ce4; }
+    .btn-login:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .error-box {
+      background: #fef0f0; border: 1px solid #fcc; border-radius: 10px;
+      padding: 10px 14px; font-size: 0.83rem; color: var(--danger);
+      display: none; align-items: center; gap: 8px; margin-bottom: 16px;
+    }
+    .error-box.show { display: flex; }
+
+    .hint { text-align: center; margin-top: 22px; font-size: 0.76rem; color: var(--muted); }
+    .hint a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<div class="login-wrap">
+  <div class="logo-row">
+    <div class="logo-circle"><i class="fas fa-university"></i></div>
+    <h1>SNDT Women's University</h1>
+    <p>Annual Report Portal — Sign In</p>
+  </div>
+
+  <div class="error-box" id="errBox"><i class="fas fa-exclamation-circle"></i><span id="errMsg">Invalid credentials</span></div>
+
+  <div class="field">
+    <label>Username</label>
+    <input type="text" id="username" placeholder="Enter your username" autocomplete="username">
+  </div>
+
+  <div class="field">
+    <label>Password</label>
+    <div class="pw-wrap">
+      <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password" onkeydown="if(event.key==='Enter') doLogin()">
+      <button class="pw-eye" onclick="togglePw()" type="button"><i class="fas fa-eye" id="eyeIcon"></i></button>
+    </div>
+  </div>
+
+  <button class="btn-login" id="loginBtn" onclick="doLogin()">
+    <i class="fas fa-sign-in-alt"></i> Sign In
+  </button>
+
+  <div class="hint">
+    Admin default: <strong>admin</strong> / <strong>admin123</strong>
+  </div>
+</div>
+
+<script>
+const API = 'http://localhost:3001/api';
+
+// If already logged in, redirect
+const existing = localStorage.getItem('sndt_token');
+const existingRole = localStorage.getItem('sndt_role');
+if (existing) {
+  if (existingRole === 'admin') window.location.href = 'admin.html';
+  else window.location.href = 'index.html';
+}
+
+function togglePw() {
+  const inp = document.getElementById('password');
+  const ico = document.getElementById('eyeIcon');
+  if (inp.type === 'password') { inp.type = 'text'; ico.className = 'fas fa-eye-slash'; }
+  else { inp.type = 'password'; ico.className = 'fas fa-eye'; }
+}
+
+async function doLogin() {
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+  const btn      = document.getElementById('loginBtn');
+  const errBox   = document.getElementById('errBox');
+
+  errBox.classList.remove('show');
+
+  if (!username || !password) {
+    document.getElementById('errMsg').textContent = 'Please enter username and password';
+    errBox.classList.add('show'); return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in…';
+
+  try {
+    const res  = await fetch(`${API}/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+    const data = await res.json();
+
+    if (!data.success) {
+      document.getElementById('errMsg').textContent = data.error || 'Login failed';
+      errBox.classList.add('show');
+    } else {
+      localStorage.setItem('sndt_token',    data.token);
+      localStorage.setItem('sndt_role',     data.role);
+      localStorage.setItem('sndt_username', data.username);
+      localStorage.setItem('sndt_deptName', data.deptName || '');
+
+      if (data.role === 'admin') window.location.href = 'admin.html';
+      else window.location.href = 'index.html';
+    }
+  } catch(err) {
+    document.getElementById('errMsg').textContent = 'Cannot connect to server. Make sure the backend is running on port 3001.';
+    errBox.classList.add('show');
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
+}
+</script>
+</body>
+</html>

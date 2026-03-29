@@ -1,0 +1,3960 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNDT Annual Report</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --primary: #1a1f2e;
+            --accent: #4f6ef7;
+            --accent2: #e8a838;
+            --success: #22c98a;
+            --danger: #e85a5a;
+            --bg: #f0f2f8;
+            --card: #fff;
+            --border: #e2e6f0;
+            --text: #1a1f2e;
+            --muted: #6b7399;
+            --shadow: 0 4px 24px rgba(79, 110, 247, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* SIDEBAR */
+        #sidebar {
+            width: 260px;
+            background: var(--primary);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 50;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .brand {
+            padding: 28px 24px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .brand-logo {
+            width: 44px;
+            height: 44px;
+            background: var(--accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 14px rgba(79, 110, 247, 0.4);
+        }
+
+        .brand h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .brand span {
+            font-size: 0.73rem;
+            color: rgba(255, 255, 255, 0.38);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-section {
+            padding: 18px 12px 0;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .nav-label {
+            font-size: 0.65rem;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.28);
+            padding: 0 12px;
+            margin-bottom: 7px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            color: rgba(255, 255, 255, 0.52);
+            font-size: 0.87rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            margin-bottom: 2px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .nav-link i {
+            width: 18px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.88);
+        }
+
+        .nav-link.active {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 3px 12px rgba(79, 110, 247, 0.35);
+        }
+
+        .nav-link .nav-num {
+            margin-left: auto;
+            background: rgba(255, 255, 255, 0.09);
+            font-size: 0.67rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .nav-link.active .nav-num {
+            background: rgba(255, 255, 255, 0.22);
+        }
+
+        .nav-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.07);
+            margin: 10px 12px;
+        }
+
+        .nav-footer {
+            padding: 16px 20px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.70rem;
+            color: rgba(255, 255, 255, 0.35);
+            margin-bottom: 7px;
+        }
+
+        .progress-track {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.10);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 99px;
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+
+        /* MAIN */
+        #main {
+            margin-left: 260px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        #topbar {
+            background: var(--card);
+            padding: 0 32px;
+            height: 66px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .topbar-left h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--text);
+        }
+
+        .section-badge {
+            background: #eff2ff;
+            color: var(--accent);
+            font-size: 0.73rem;
+            font-weight: 600;
+            padding: 3px 11px;
+            border-radius: 20px;
+        }
+
+        .topbar-right {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        /* BUTTONS */
+        .btn {
+            padding: 8px 16px;
+            border-radius: 9px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.84rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            transition: all 0.2s;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .btn i {
+            font-size: 0.76rem;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(79, 110, 247, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: #3b5ce4;
+        }
+
+        .btn-outline {
+            background: #fff;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: #fff;
+        }
+
+        .btn-success:hover {
+            background: #18a872;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: #fff;
+        }
+
+        .btn-sm {
+            padding: 5px 11px;
+            font-size: 0.76rem;
+            border-radius: 7px;
+        }
+
+        .btn-amber {
+            background: var(--accent2);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(232, 168, 56, 0.28);
+        }
+
+        .btn-amber:hover {
+            background: #d4942a;
+        }
+
+        .btn-danger-soft {
+            background: transparent;
+            color: var(--muted);
+            border: 1px solid var(--border);
+            padding: 4px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 500;
+            transition: all 0.18s;
+            white-space: nowrap;
+        }
+
+        .btn-danger-soft:hover {
+            background: #fef0f0;
+            color: var(--danger);
+            border-color: #fcc;
+        }
+
+        .add-row-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 8px;
+            padding: 6px 14px;
+            background: #fff;
+            border: 1.5px dashed var(--border);
+            border-radius: 8px;
+            color: var(--accent);
+            font-size: 0.80rem;
+            font-weight: 600;
+            font-family: 'DM Sans', sans-serif;
+            cursor: pointer;
+            transition: all 0.18s;
+        }
+
+        .add-row-btn:hover {
+            background: #eff2ff;
+            border-color: var(--accent);
+        }
+
+        /* DASHBOARD */
+        #dashSection {
+            padding: 28px 32px;
+        }
+
+        .dash-header {
+            margin-bottom: 24px;
+        }
+
+        .dash-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--primary);
+        }
+
+        .dash-header p {
+            color: var(--muted);
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+
+        .dash-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .dash-card {
+            background: var(--card);
+            border-radius: 14px;
+            padding: 18px 20px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: 0 1px 5px rgba(26, 31, 46, 0.05);
+        }
+
+        .dash-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .di-blue {
+            background: #eff2ff;
+            color: var(--accent);
+        }
+
+        .di-green {
+            background: #e8faf3;
+            color: var(--success);
+        }
+
+        .di-amber {
+            background: #fef8ec;
+            color: var(--accent2);
+        }
+
+        .dash-val {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .dash-lbl {
+            font-size: 0.73rem;
+            color: var(--muted);
+            margin-top: 3px;
+        }
+
+        .year-group {
+            margin-bottom: 28px;
+        }
+
+        .year-group-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .year-group-title i {
+            color: var(--accent);
+        }
+
+        .rcard {
+            background: var(--card);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 1px 5px rgba(26, 31, 46, 0.05);
+            margin-bottom: 10px;
+        }
+
+        .rcard-left {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .rcard-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: #eff2ff;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+
+        .rcard-title {
+            font-weight: 600;
+            font-size: 0.90rem;
+            color: var(--primary);
+        }
+
+        .rcard-meta {
+            font-size: 0.74rem;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        .rcard-actions {
+            display: flex;
+            gap: 7px;
+        }
+
+        .no-reports-msg {
+            text-align: center;
+            padding: 48px 20px;
+            color: var(--muted);
+        }
+
+        .no-reports-msg i {
+            font-size: 2.5rem;
+            color: var(--border);
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .dash-spinner {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .dash-spinner .sp {
+            width: 34px;
+            height: 34px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            margin: 0 auto 12px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        .new-report-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--accent), #3b5ce4);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 14px 22px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(79, 110, 247, 0.35);
+            transition: all 0.2s;
+            margin-bottom: 24px;
+        }
+
+        .new-report-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 22px rgba(79, 110, 247, 0.45);
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+
+        .pill-green {
+            background: #e8faf3;
+            color: var(--success);
+        }
+
+        .pill-amber {
+            background: #fef8ec;
+            color: var(--accent2);
+        }
+
+        /* FORM SECTIONS */
+        section {
+            display: none;
+            padding: 28px 32px;
+            animation: fadeUp 0.3s ease;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        /* YEAR BANNER */
+        .year-banner {
+            background: linear-gradient(135deg, var(--primary) 0%, #2d3561 100%);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .year-banner::before {
+            content: '';
+            position: absolute;
+            right: -30px;
+            top: -40px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(79, 110, 247, 0.15);
+        }
+
+        .year-banner-left h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .year-banner-left p {
+            font-size: 0.83rem;
+            color: rgba(255, 255, 255, 0.52);
+        }
+
+        .year-select-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1;
+        }
+
+        .year-select-wrap label {
+            font-size: 0.80rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 500;
+        }
+
+        /* SECTION HEADERS */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+            padding-bottom: 14px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--accent);
+        }
+
+        h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.0rem;
+            color: var(--primary);
+            margin: 20px 0 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        h3::before {
+            content: '';
+            width: 4px;
+            height: 16px;
+            background: var(--accent);
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        h4 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 14px 0 7px;
+            padding-left: 10px;
+            border-left: 3px solid var(--accent);
+        }
+
+        /* TABLES */
+        .table-wrapper {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 14px;
+            box-shadow: 0 1px 6px rgba(26, 31, 46, 0.06);
+            background: #fff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead tr {
+            background: #eef0f8;
+            border-bottom: 2px solid var(--border);
+        }
+
+        thead th {
+            padding: 11px 13px;
+            text-align: left;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--primary);
+            border-right: 1px solid var(--border);
+            white-space: normal;
+            word-break: break-word;
+            vertical-align: middle;
+            line-height: 1.45;
+        }
+
+        thead th.sr-th {
+            width: 42px;
+            min-width: 42px;
+            text-align: center;
+            padding: 11px 6px;
+        }
+
+        thead th.action-th {
+            width: 80px;
+            min-width: 80px;
+            text-align: center;
+            padding: 11px 6px;
+        }
+
+        thead th:last-child {
+            border-right: none;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid var(--border);
+            transition: background 0.12s;
+        }
+
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #fafbff;
+        }
+
+        tbody tr:hover {
+            background: #f0f3ff;
+        }
+
+        tbody td {
+            padding: 8px 13px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.84rem;
+            color: var(--text);
+            vertical-align: middle;
+            border-right: 1px solid var(--border);
+            line-height: 1.45;
+        }
+
+        tbody td:last-child {
+            border-right: none;
+            text-align: center;
+        }
+
+        .label-col {
+            background: #f6f7fb !important;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.84rem;
+            font-weight: 600;
+            width: 36%;
+            color: var(--primary);
+            border-right: 1px solid var(--border) !important;
+        }
+
+        .sr-td {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--muted);
+            text-align: center;
+            width: 42px;
+            min-width: 42px;
+            padding: 8px 6px;
+            background: #f6f7fb;
+            border-right: 1px solid var(--border);
+        }
+
+        /* INPUTS */
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        input[type="email"],
+        input[type="url"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 6px 10px;
+            border: 1.5px solid var(--border);
+            border-radius: 7px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.84rem;
+            background: #fff;
+            color: var(--text);
+            transition: all 0.17s;
+            -webkit-appearance: none;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(79, 110, 247, 0.10);
+            background: #fff;
+        }
+
+        textarea {
+            resize: vertical;
+            line-height: 1.55;
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236b7399'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 9px center;
+            padding-right: 26px;
+            cursor: pointer;
+        }
+
+        /* EXAMPLE */
+        .example {
+            font-size: 0.80rem;
+            color: var(--accent);
+            background: #fff;
+            border-left: 3px solid var(--accent);
+            padding: 8px 13px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        /* SECTION NAV */
+        .section-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 28px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* FILE UPLOAD */
+        .upload-zone {
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            padding: 22px;
+            text-align: center;
+            background: #fff;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            margin-top: 8px;
+        }
+
+        .upload-zone:hover {
+            border-color: var(--accent);
+            background: #f5f7ff;
+        }
+
+        .upload-zone input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+            border: none;
+            padding: 0;
+        }
+
+        .upload-icon-big {
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 7px;
+            display: block;
+        }
+
+        .upload-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 3px;
+        }
+
+        .upload-hint {
+            font-size: 0.70rem;
+            color: var(--muted);
+        }
+
+        .file-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .file-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.76rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .file-chip .chip-del {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--muted);
+            font-size: 0.68rem;
+            padding: 0;
+            line-height: 1;
+            transition: color 0.15s;
+        }
+
+        .file-chip .chip-del:hover {
+            color: var(--danger);
+        }
+
+        .img-preview-wrap {
+            position: relative;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .img-preview-wrap img {
+            width: 120px;
+            height: 80px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .img-preview-wrap .chip-del {
+            position: absolute;
+            top: 3px;
+            right: 3px;
+            background: rgba(26, 31, 46, 0.7);
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.65rem;
+            padding: 2px 5px;
+        }
+
+        /* SIGNATURE */
+        .sig-box {
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            background: #fff;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+            display: inline-block;
+            min-width: 240px;
+        }
+
+        .sig-box:hover {
+            border-color: var(--accent);
+        }
+
+        .sig-box input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+            border: none;
+            padding: 0;
+        }
+
+        /* MODALS */
+        #downloadPopup {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(26, 31, 46, 0.55);
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+
+        #downloadPopup.open {
+            display: flex;
+        }
+
+        .modal-box {
+            background: #fff;
+            border-radius: 16px;
+            padding: 36px 40px;
+            max-width: 460px;
+            width: 92%;
+            box-shadow: 0 20px 60px rgba(26, 31, 46, 0.2);
+            text-align: center;
+            border-top: 4px solid var(--accent);
+        }
+
+        .modal-icon {
+            width: 60px;
+            height: 60px;
+            background: #eff2ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin: 0 auto 16px;
+        }
+
+        .modal-box h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .modal-box p {
+            font-size: 0.84rem;
+            color: var(--muted);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .download-options {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 8px 0;
+        }
+
+        .btn-danger-dl {
+            background: linear-gradient(135deg, #e85a5a, #c0392b);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 14px 22px;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s;
+            min-width: 130px;
+            box-shadow: 0 4px 14px rgba(232, 90, 90, 0.35);
+        }
+
+        .btn-danger-dl:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-danger-dl i {
+            font-size: 1.6rem;
+            margin-bottom: 2px;
+        }
+
+        /* DELETE CONFIRM */
+        #cfModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1200;
+            background: rgba(26, 31, 46, 0.6);
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(3px);
+        }
+
+        #cfModal.open {
+            display: flex;
+        }
+
+        .cfbox {
+            background: #fff;
+            border-radius: 16px;
+            padding: 30px 34px;
+            max-width: 380px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(26, 31, 46, 0.2);
+            border-top: 4px solid var(--danger);
+        }
+
+        .cfbox .ci {
+            width: 48px;
+            height: 48px;
+            background: #fef0f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 1.2rem;
+            color: var(--danger);
+        }
+
+        .cfbox h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            margin-bottom: 6px;
+        }
+
+        .cfbox p {
+            font-size: 0.81rem;
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        .cfacts {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        /* OFFLINE */
+        #offlineBanner {
+            display: none;
+            background: #e8a838;
+            color: #fff;
+            padding: 9px 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            align-items: center;
+            gap: 9px;
+            justify-content: center;
+        }
+
+        #offlineBadge {
+            display: none;
+            background: #e8a838;
+            color: #fff;
+            font-size: 0.70rem;
+            font-weight: 700;
+            padding: 3px 9px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        #offlinePanel {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 998;
+            background: rgba(26, 31, 46, 0.5);
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(3px);
+        }
+
+        #offlinePanel.open {
+            display: flex;
+        }
+
+        .saved-box {
+            background: #fff;
+            border-radius: 16px;
+            padding: 32px 36px;
+            max-width: 560px;
+            width: 92%;
+            box-shadow: 0 20px 60px rgba(26, 31, 46, 0.2);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .saved-box h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .saved-box h2 i {
+            color: var(--accent);
+        }
+
+        .saved-box .sub {
+            font-size: 0.82rem;
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        .report-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: var(--bg);
+            border-radius: 10px;
+            margin-bottom: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .report-row-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .report-icon {
+            width: 38px;
+            height: 38px;
+            background: #eff2ff;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .report-year {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .report-meta {
+            font-size: 0.74rem;
+            color: var(--muted);
+        }
+
+        .report-row-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .no-reports {
+            text-align: center;
+            padding: 32px;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        /* TOAST */
+        #toast {
+            position: fixed;
+            bottom: 22px;
+            right: 22px;
+            z-index: 9999;
+            background: var(--primary);
+            color: #fff;
+            padding: 11px 18px;
+            border-radius: 12px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 10px 30px rgba(26, 31, 46, 0.25);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        #toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #toast.success {
+            background: #18a872;
+        }
+
+        #toast.error {
+            background: #c0392b;
+        }
+
+        @media(max-width:768px) {
+            #sidebar {
+                display: none;
+            }
+
+            #main {
+                margin-left: 0;
+            }
+        }
+
+        @media print {
+
+            #sidebar,
+            #topbar,
+            .section-navigation,
+            .btn-danger-soft,
+            .add-row-btn,
+            #downloadPopup,
+            #toast {
+                display: none !important;
+            }
+
+            #main {
+                margin-left: 0;
+            }
+
+            section {
+                display: block !important;
+            }
+
+            body {
+                background: #fff;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- OFFLINE BANNER -->
+    <div id="offlineBanner"><i class="fas fa-wifi-slash"></i> You are offline. Changes will be saved locally and synced
+        when you reconnect.</div>
+
+    <!-- SIDEBAR -->
+    <div id="sidebar">
+        <div class="brand">
+            <div class="brand-logo"><i class="fas fa-file-alt"></i></div>
+            <h2>SNDT Annual Report</h2>
+            <span id="sidebarYear">Select Year</span>
+        </div>
+        <div class="nav-section">
+            <div class="nav-label">Navigation</div>
+            <button class="nav-link active" id="nav-dash" onclick="showDashboard()"><i class="fas fa-th-large"></i><span
+                    style="flex:1">My Reports</span></button>
+            <div class="nav-divider"></div>
+            <div class="nav-label" id="formNavLabel" style="display:none">Report Sections</div>
+            <button class="nav-link" id="nav-s1" onclick="showSection('section1','nav-s1','Basic Department Details')"
+                style="display:none"><i class="fas fa-building"></i><span style="flex:1">Basic Details</span><span
+                    class="nav-num">01</span></button>
+            <button class="nav-link" id="nav-s2"
+                onclick="showSection('section2','nav-s2','Admission &amp; Staff Details')" style="display:none"><i
+                    class="fas fa-users"></i><span style="flex:1">Admission &amp; Staff</span><span
+                    class="nav-num">02</span></button>
+            <button class="nav-link" id="nav-s3" onclick="showSection('section3','nav-s3','Events &amp; Participation')"
+                style="display:none"><i class="fas fa-calendar-alt"></i><span style="flex:1">Events</span><span
+                    class="nav-num">03</span></button>
+            <button class="nav-link" id="nav-s4"
+                onclick="showSection('section4','nav-s4','Publications &amp; Research')" style="display:none"><i
+                    class="fas fa-book"></i><span style="flex:1">Publications</span><span
+                    class="nav-num">04</span></button>
+            <button class="nav-link" id="nav-s5" onclick="showSection('section5','nav-s5','Research Projects')"
+                style="display:none"><i class="fas fa-flask"></i><span style="flex:1">Research</span><span
+                    class="nav-num">05</span></button>
+            <button class="nav-link" id="nav-s6" onclick="showSection('section6','nav-s6','Awards &amp; Exams')"
+                style="display:none"><i class="fas fa-trophy"></i><span style="flex:1">Awards &amp; Exams</span><span
+                    class="nav-num">06</span></button>
+            <button class="nav-link" id="nav-s7"
+                onclick="showSection('section7','nav-s7','Study Visits &amp; Visitors')" style="display:none"><i
+                    class="fas fa-globe"></i><span style="flex:1">Visits</span><span class="nav-num">07</span></button>
+            <button class="nav-link" id="nav-s8" onclick="showSection('section8','nav-s8','Department Activities')"
+                style="display:none"><i class="fas fa-hands-helping"></i><span style="flex:1">Dept.
+                    Activities</span><span class="nav-num">08</span></button>
+            <button class="nav-link" id="nav-s9" onclick="showSection('section9','nav-s9','MOUs &amp; Donors')"
+                style="display:none"><i class="fas fa-handshake"></i><span style="flex:1">MOUs &amp; Donors</span><span
+                    class="nav-num">09</span></button>
+            <button class="nav-link" id="nav-s10" onclick="showSection('section10','nav-s10','Alumni Association')"
+                style="display:none"><i class="fas fa-user-graduate"></i><span style="flex:1">Alumni</span><span
+                    class="nav-num">10</span></button>
+        </div>
+        <div class="nav-footer">
+            <div class="progress-info"><span>Progress</span><span id="pct-label">0%</span></div>
+            <div class="progress-track">
+                <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN -->
+    <div id="main">
+        <div id="topbar">
+            <div class="topbar-left">
+                <h1>SNDT Women's University</h1>
+                <span class="section-badge" id="section-badge">My Reports</span>
+            </div>
+            <div class="topbar-right">
+                <span id="offlineBadge" onclick="openOfflinePanel()"><i class="fas fa-wifi"></i> Offline Queue</span>
+                <span style="font-size:0.80rem;color:var(--muted);padding:0 4px;" id="userTag"></span>
+                <button class="btn btn-outline" id="btnBackDash" onclick="showDashboard()" style="display:none"><i
+                        class="fas fa-arrow-left"></i> Dashboard</button>
+                <button class="btn btn-outline" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
+                <button class="btn btn-primary" id="btnDownload" onclick="openDownloadPopup()" style="display:none"><i
+                        class="fas fa-download"></i> Download</button>
+                <button class="btn btn-amber" id="btnSubmit" onclick="submitReport()" style="display:none"><i
+                        class="fas fa-paper-plane"></i> Submit Report</button>
+                <button class="btn btn-outline" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </div>
+
+        <div id="content">
+
+            <!-- ═══ DASHBOARD ═══ -->
+            <div id="dashSection">
+                <div class="dash-header">
+                    <h2><i class="fas fa-th-large" style="color:var(--accent);margin-right:8px;"></i>My Annual Reports
+                    </h2>
+                    <p id="dashSubtitle">View, edit or create annual reports for your department</p>
+                </div>
+                <div class="dash-stats">
+                    <div class="dash-card">
+                        <div class="dash-icon di-blue"><i class="fas fa-file-alt"></i></div>
+                        <div>
+                            <div class="dash-val" id="dsTotalReports">—</div>
+                            <div class="dash-lbl">Total Reports</div>
+                        </div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="dash-icon di-green"><i class="fas fa-calendar-check"></i></div>
+                        <div>
+                            <div class="dash-val" id="dsLatestYear">—</div>
+                            <div class="dash-lbl">Latest Year</div>
+                        </div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="dash-icon di-amber"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <div class="dash-val" id="dsLastSaved">—</div>
+                            <div class="dash-lbl">Last Saved</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="new-report-btn" onclick="startNewReport()"><i class="fas fa-plus-circle"
+                        style="font-size:1.1rem;"></i> Create New Annual Report</button>
+                <div id="reportsListWrap">
+                    <div class="dash-spinner">
+                        <div class="sp"></div>
+                        <p style="color:var(--muted);font-size:0.83rem;">Loading reports…</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════
+             SECTION 1 — Basic Department Details (from File 1)
+        ═══════════════════════════════════════════════ -->
+            <section id="section1">
+                <div class="section-header">
+                    <div class="section-title"><i class="fas fa-building"></i> Basic Department Details</div>
+                </div>
+
+                <!-- YEAR SELECTION BANNER -->
+                <div class="year-banner">
+                    <div class="year-banner-left">
+                        <h2>Annual Report &nbsp;<span id="bannerYear">—</span></h2>
+                        <p>Type the academic year for which this report is being prepared</p>
+                    </div>
+                    <div class="year-select-wrap">
+                        <label><i class="fas fa-calendar"></i> &nbsp;Academic Year</label>
+                        <input type="text" id="academicYear" value="" placeholder="e.g. 2025-26"
+                            oninput="updateYear(this.value)"
+                            style="width:140px;padding:9px 14px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:9px;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.92rem;font-weight:600;outline:none;text-align:center;" />
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th colspan="2">1. Name and Address of the Department / Institute / College</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="label-col">Name of Department / Institute</td>
+                                <td><input type="text" id="s1_deptName" placeholder="Enter Department Name"></td>
+                            </tr>
+                            <tr>
+                                <td class="label-col">Address</td>
+                                <td><textarea id="s1_address" rows="3" placeholder="Enter Complete Address"></textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th colspan="2">2. Year of Establishment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="label-col">Year</td>
+                                <td><input type="number" id="s1_yearEstab" placeholder="Example: 1998"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th colspan="2">3. Head of the Department</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="label-col">Name of Director / HOD / Principal</td>
+                                <td><input type="text" id="s1_hodName"></td>
+                            </tr>
+                            <tr>
+                                <td class="label-col">Name of In-charge Director / HOD / Principal</td>
+                                <td><input type="text" id="s1_hodInCharge"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th colspan="2">4. Contact Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="label-col">Telephone (Office)</td>
+                                <td><input type="text" id="s1_telephone"></td>
+                            </tr>
+                            <tr>
+                                <td class="label-col">Fax Number</td>
+                                <td><input type="text" id="s1_fax"></td>
+                            </tr>
+                            <tr>
+                                <td class="label-col">Email Address</td>
+                                <td><input type="email" id="s1_email"></td>
+                            </tr>
+                            <tr>
+                                <td class="label-col">Official Website</td>
+                                <td><input type="url" id="s1_website"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4>5. Details of the Degree/Diploma/Certificates (UG/PG) Programmes</h4>
+                <div class="table-wrapper">
+                    <table id="programmeTable">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Name of the Programme</th>
+                                <th>Year of Starting</th>
+                                <th>Aided/Unaided</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <button class="add-row-btn" onclick="addRowProgramme()"><i class="fas fa-plus"></i> Add
+                    Programme</button>
+
+                <h4>6. Details of Physical Infrastructure</h4>
+                <div class="table-wrapper">
+                    <table id="infraTable">
+                        <thead>
+                            <tr>
+                                <th>Classroom(s) / Laboratory(s)</th>
+                                <th>Area (Sq. Ft)</th>
+                                <th>Laboratory/Seminar Hall/Girls Common Room/Ladies Toilet/Gents Toilet</th>
+                                <th>Area (Sq. Ft)</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <button class="add-row-btn" onclick="addRowInfra()"><i class="fas fa-plus"></i> Add
+                    Infrastructure</button>
+
+                <h4>7. Details of the Intake Capacity</h4>
+                <div class="table-wrapper">
+                    <table id="intakeTable">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">Name of the Degree/Diploma Programme</th>
+                                <th colspan="4" style="text-align:center;">Intake refers only to first year (and in case
+                                    of B.Tech, MCA first year and second year)<br><strong>Intake Capacity</strong></th>
+                                <th rowspan="2" class="action-th">Action</th>
+                            </tr>
+                            <tr>
+                                <th>UG</th>
+                                <th>PG</th>
+                                <th>M. Phil</th>
+                                <th>Ph.D.</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <button class="add-row-btn" onclick="addRowIntake()"><i class="fas fa-plus"></i> Add Intake Row</button>
+
+                <div class="section-navigation">
+                    <span></span>
+                    <button class="btn btn-primary"
+                        onclick="gotoNext('section2','nav-s2','Admission &amp; Staff Details')"><i
+                            class="fas fa-save"></i> Save &amp; Next ➡</button>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════
+             SECTION 2 — Admission & Staff Details (from File 1)
+        ═══════════════════════════════════════════════ -->
+            <section id="section2">
+                <div class="section-header">
+                    <div class="section-title"><i class="fas fa-users"></i> Admission &amp; Staff Details</div>
+                </div>
+
+                <h3>8. Admission Details</h3>
+                <h4>8.1 Category wise data</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th rowspan="2">Name of the Degree/Diploma Programme</th>
+                                <th colspan="6" style="text-align:center;">Category wise</th>
+                                <th class="action-th" rowspan="2">Action</th>
+                            </tr>
+                            <tr>
+                                <th>Open</th>
+                                <th>SC</th>
+                                <th>ST</th>
+                                <th>NTDT</th>
+                                <th>OBC</th>
+                                <th>SBC</th>
+                            </tr>
+                        </thead>
+                        <tbody id="categoryAdmissionTable">
+                            <tr>
+                                <td><select>
+                                        <option value="">Select Degree</option>
+                                        <option>Undergraduate</option>
+                                        <option>Postgraduate</option>
+                                        <option>PhD</option>
+                                    </select></td>
+                                <td><input type="number" value="0"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('categoryAdmissionTable')"><i
+                        class="fas fa-plus"></i> Add Row</button>
+
+                <h4>8.2 Year wise data</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th rowspan="2">Degree/Diploma Programme</th>
+                                <th rowspan="2">Name of the Programme</th>
+                                <th colspan="4" style="text-align:center;">Year wise</th>
+                                <th rowspan="2">Total</th>
+                                <th class="action-th" rowspan="2">Action</th>
+                            </tr>
+                            <tr>
+                                <th>Year I</th>
+                                <th>Year II</th>
+                                <th>Year III</th>
+                                <th>Year IV</th>
+                            </tr>
+                        </thead>
+                        <tbody id="yearAdmissionTable">
+                            <tr>
+                                <td><select>
+                                        <option value="">Select Degree</option>
+                                        <option>Certificate</option>
+                                        <option>Diploma</option>
+                                        <option>Undergraduate degree</option>
+                                        <option>Postgraduate Diploma</option>
+                                        <option>Postgraduate degree</option>
+                                        <option>Ph.D.</option>
+                                    </select></td>
+                                <td><input type="text"></td>
+                                <td><input type="number" value="0" class="year"></td>
+                                <td><input type="number" value="0" class="year"></td>
+                                <td><input type="number" value="0" class="year"></td>
+                                <td><input type="number" value="0" class="year"></td>
+                                <td><input type="number" value="0" readonly style="background:#f6f7fb;"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('yearAdmissionTable')"><i
+                        class="fas fa-plus"></i> Add Row</button>
+
+                <h4>9. Details of Scholarships received by students</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No.</th>
+                                <th>Name of the Scholarship/Fellowship received by the students</th>
+                                <th>Number of students receiving</th>
+                                <th>Name of the organization/Ministry/Department awarding scholarship/Fellowship<br>(use
+                                    separate row for each fellowship/scholarship)</th>
+                                <th>Total amount</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="scholarshipTable">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><input type="text"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('scholarshipTable')"><i
+                        class="fas fa-plus"></i> Add Row</button>
+
+                <h4>10. Details of Faculty Members</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No.</th>
+                                <th>Name of the Faculty Member</th>
+                                <th>Qualification</th>
+                                <th>Subject of Teaching</th>
+                                <th>Designation</th>
+                                <th>Nature of Appointment<br>Permanent/Adhoc/CHB</th>
+                                <th>Category<br>Open/Reserved</th>
+                                <th>Date of Appointment</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="facultyTable">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><select>
+                                        <option>Permanent</option>
+                                        <option>Adhoc</option>
+                                        <option>CHB</option>
+                                    </select></td>
+                                <td><select>
+                                        <option>Open</option>
+                                        <option>Reserved</option>
+                                    </select></td>
+                                <td><input type="date"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('facultyTable')"><i
+                        class="fas fa-plus"></i> Add Row</button>
+
+                <h4>10.a No. of Guest Faculty Invited</h4>
+                <p style="font-size:14px;margin-bottom:10px;">(Those who are invited as experts to conduct one or two
+                    sessions)</p>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No.</th>
+                                <th>Name of the Guest Faculty</th>
+                                <th>Details about Position Held / Distinguished Nature</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="guestFacultyTable">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('guestFacultyTable')"><i
+                        class="fas fa-plus"></i> Add Row</button>
+
+                <h4>11. Details of Non-Teaching Staff</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No.</th>
+                                <th>Name of the Employee</th>
+                                <th>Designation</th>
+                                <th>Nature of Appointment</th>
+                                <th>Date of Appointment</th>
+                                <th>Category<br>Open/Reserved</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="nonTeachingTable">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="date"></td>
+                                <td><select>
+                                        <option>Open</option>
+                                        <option>Reserved</option>
+                                    </select></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('nonTeachingTable')"><i
+                        class="fas fa-plus"></i> Add Row</button>
+
+                <div class="section-navigation">
+                    <button class="btn btn-outline" onclick="gotoNext('section1','nav-s1','Basic Department Details')">⬅
+                        Previous</button>
+                    <button class="btn btn-primary"
+                        onclick="gotoNext('section3','nav-s3','Events &amp; Participation')"><i class="fas fa-save"></i>
+                        Save &amp; Next ➡</button>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════
+             SECTION 3 — Events & Participation (from File 1)
+        ═══════════════════════════════════════════════ -->
+            <section id="section3">
+                <div class="section-header">
+                    <div class="section-title"><i class="fas fa-calendar-alt"></i> Events &amp; Participation</div>
+                </div>
+
+                <h3>12. Academic Activities / State Level / National / International Level held by the College /
+                    Department / Institute</h3>
+
+                <h4>12.1 Organized during</h4>
+                <div class="table-wrapper">
+                    <table id="sec3_table121">
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No.</th>
+                                <th>Title of the Conference/Seminar/Workshop</th>
+                                <th>Date and Venue</th>
+                                <th>Sponsoring Agency</th>
+                                <th>No. of Participants</th>
+                                <th>International, National or State Level</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><select>
+                                        <option value="">Select Level</option>
+                                        <option>International</option>
+                                        <option>National</option>
+                                        <option>State</option>
+                                    </select></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowCloneById('sec3_table121')"><i
+                        class="fas fa-plus"></i> Add Row</button>
+
+                <h4>12.2 Organization of other events (Images/PDF/Word files, max 512KB each)</h4>
+                <div class="table-wrapper">
+                    <table id="sec3_table122">
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No.</th>
+                                <th>Title of the Conference/Seminar/Workshop</th>
+                                <th>Date and Venue</th>
+                                <th>Sponsoring Agency</th>
+                                <th>No. of Participants</th>
+                                <th>International, National or State Level</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><select>
+                                        <option value="">Select Level</option>
+                                        <option>International</option>
+                                        <option>National</option>
+                                        <option>State</option>
+                                    </select></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowCloneById('sec3_table122')"><i
+                        class="fas fa-plus"></i> Add Row</button>
+
+                <div class="upload-zone">
+                    <input type="file" id="fileInput122" multiple>
+                    <span class="upload-icon-big"><i class="fas fa-cloud-upload-alt"></i></span>
+                    <div class="upload-title">Click or drag &amp; drop files here</div>
+                    <div class="upload-hint">Images · PDF · Word — max 512 KB each</div>
+                </div>
+                <div class="file-grid" id="previewContainer122"></div>
+
+                <h4>13. Particulars of Faculty participation and papers presented</h4>
+                <div class="table-wrapper">
+                    <table id="sec3_table13">
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No.</th>
+                                <th>Name of the Faculty member</th>
+                                <th>Title of the Paper Presented</th>
+                                <th>Title of the Conference/Seminar</th>
+                                <th>Date and Venue of the Conference/Seminar and name of the Organizer (College,
+                                    University, Institution, etc)</th>
+                                <th>International, national or state level</th>
+                                <th>If Chaired a session / keynote speaker</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><select>
+                                        <option value="">Select Level</option>
+                                        <option>International</option>
+                                        <option>National</option>
+                                        <option>State</option>
+                                    </select></td>
+                                <td><input type="text"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowCloneById('sec3_table13')"><i
+                        class="fas fa-plus"></i> Add Row</button>
+
+                <h4>14. Particulars of Faculty participation in workshops conducted by the department/College or by
+                    others outside SNDTWU</h4>
+                <div class="table-wrapper">
+                    <table id="sec3_table14">
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No.</th>
+                                <th>Name of the Faculty member</th>
+                                <th>Title of the Workshop</th>
+                                <th>Date and Venue of the Workshop and name of the Organizer (College, University,
+                                    institution etc)</th>
+                                <th>International, national or state level</th>
+                                <th>If Resource Person (Conducted session)</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><select>
+                                        <option value="">Select Level</option>
+                                        <option>International</option>
+                                        <option>National</option>
+                                        <option>State</option>
+                                    </select></td>
+                                <td><input type="text"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowCloneById('sec3_table14')"><i
+                        class="fas fa-plus"></i> Add Row</button>
+
+                <h3>15. Initiatives undertaken towards faculty development</h3>
+                <div class="table-wrapper">
+                    <table id="facultyDevTable">
+                        <thead>
+                            <tr>
+                                <th>Faculty / Staff Development Programmes</th>
+                                <th>Title of the programme</th>
+                                <th>Number of faculty benefitted</th>
+                                <th>Dates</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Refresher courses</td>
+                                <td><input type="text"></td>
+                                <td><input type="number"></td>
+                                <td><input type="date"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                            <tr>
+                                <td>UGC – Faculty Improvement Programme</td>
+                                <td><input type="text"></td>
+                                <td><input type="number"></td>
+                                <td><input type="date"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                            <tr>
+                                <td>HRD programmes</td>
+                                <td><input type="text"></td>
+                                <td><input type="number"></td>
+                                <td><input type="date"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                            <tr>
+                                <td>Orientation programmes</td>
+                                <td><input type="text"></td>
+                                <td><input type="number"></td>
+                                <td><input type="date"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                            <tr>
+                                <td>Faculty exchange programme</td>
+                                <td><input type="text"></td>
+                                <td><input type="number"></td>
+                                <td><input type="date"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                            <tr>
+                                <td>Staff training conducted by the university</td>
+                                <td><input type="text"></td>
+                                <td><input type="number"></td>
+                                <td><input type="date"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                            <tr>
+                                <td>Staff training conducted by other institutions</td>
+                                <td><input type="text"></td>
+                                <td><input type="number"></td>
+                                <td><input type="date"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                            <tr>
+                                <td>Summer/Winter schools, Workshops</td>
+                                <td><input type="text"></td>
+                                <td><input type="number"></td>
+                                <td><input type="date"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                            <tr>
+                                <td>Others</td>
+                                <td><input type="text"></td>
+                                <td><input type="number"></td>
+                                <td><input type="date"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('facultyDevTable')"><i
+                        class="fas fa-plus"></i> Add Row</button>
+
+                <div class="section-navigation">
+                    <button type="button" class="btn btn-outline"
+                        onclick="gotoNext('section2','nav-s2','Admission &amp; Staff Details')">⬅ Previous</button>
+                    <button type="button" class="btn btn-primary"
+                        onclick="gotoNext('section4','nav-s4','Publications &amp; Research')"><i
+                            class="fas fa-save"></i> Save &amp; Next ➡</button>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════
+             SECTION 4 — Publications & Research (from File 1)
+        ═══════════════════════════════════════════════ -->
+            <section id="section4">
+                <div class="section-header">
+                    <div class="section-title"><i class="fas fa-book"></i> Publications &amp; Research</div>
+                </div>
+
+                <h3>16. Details of the Publication of Faculty as well as Students</h3>
+
+                <h4>16.1 Journal Articles</h4>
+                <p class="example">Dr. Paul Zaveri — Digital library education at S.H.P.T. School of Library Science,
+                    S.N.D.T. Women's University, Mumbai. Library Philosophy and Practice, June 2012.</p>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No</th>
+                                <th>Name of Author/s</th>
+                                <th>Faculty/Student</th>
+                                <th>Title of the article (National/International/other)</th>
+                                <th>Journal Title</th>
+                                <th>Date of publication in the Journal</th>
+                                <th>Volume No., Issue No., Pagination, ISSN No</th>
+                                <th>Peer review/e-journal/ refereed</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table16_1">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="number"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('table16_1')"><i class="fas fa-plus"></i>
+                    Add Row</button>
+
+                <h4>16.2 Books</h4>
+                <p class="example">Dr. Chitra Sohani — Constructivism and Teaching learning process. In Adhyana Adhyapan
+                    Prakriya (Teaching learning Process). Nasik: Insight Publication, September 2012. ISBN:
+                    987-93-81354-32-2</p>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No</th>
+                                <th>Name of Author/s</th>
+                                <th>Faculty/Student</th>
+                                <th>Title of Book</th>
+                                <th>Place of Publication</th>
+                                <th>Publisher</th>
+                                <th>Year of Publication, Pagination, ISBN No</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table16_2">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="number"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('table16_2')"><i class="fas fa-plus"></i>
+                    Add Row</button>
+
+                <h4>16.3 Chapters in Edited Book</h4>
+                <p class="example">Author Name — Title of Chapter. In: Book Title. Place: Publisher, Year.</p>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No</th>
+                                <th>Name of Author/s</th>
+                                <th>Faculty/Student</th>
+                                <th>Title of the Chapter</th>
+                                <th>Title of the book</th>
+                                <th>Place of Publication</th>
+                                <th>Publisher</th>
+                                <th>Year of Publication, Pagination, ISBN No</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table16_3">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="number"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('table16_3')"><i class="fas fa-plus"></i>
+                    Add Row</button>
+
+                <h4>16.4 Conference Proceedings</h4>
+                <p class="example">Prof. Madhura Kesarkar and Dr. Jayshree Shinde — Evaluation of Learning Objects. In
+                    Proceedings of the Regional Symposium on Open Education Resources: An Asian Perspective on Policy
+                    and Practices, September 19-21, 2012.</p>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No</th>
+                                <th>Name of Author/s</th>
+                                <th>Faculty/Student</th>
+                                <th>Title of Paper</th>
+                                <th>Name and date of conference</th>
+                                <th>Publisher and Place of Publication</th>
+                                <th>Year of Publication, Pagination, ISBN No</th>
+                                <th>If online then give link</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table16_4">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="number"></td>
+                                <td><input type="url"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('table16_4')"><i class="fas fa-plus"></i>
+                    Add Row</button>
+
+                <h4>16.5 Other Publications</h4>
+                <p class="example">Dr. Mansi Rajhans — Punesthit Wayaskanmadhi Samadhan. Manasshastra Patrika, November
+                    2012. pp. 5-9.</p>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No</th>
+                                <th>Name of Author/s</th>
+                                <th>Faculty/Student</th>
+                                <th>Title of the Paper/article/book</th>
+                                <th>Publisher and Place of Publication</th>
+                                <th>Year of Publication, Pagination, ISBN No</th>
+                                <th>If online then give link</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table16_5">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="number"></td>
+                                <td><input type="url"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('table16_5')"><i class="fas fa-plus"></i>
+                    Add Row</button>
+
+                <div class="section-navigation">
+                    <button type="button" class="btn btn-outline"
+                        onclick="gotoNext('section3','nav-s3','Events &amp; Participation')">⬅ Previous</button>
+                    <button type="button" class="btn btn-primary"
+                        onclick="gotoNext('section5','nav-s5','Research Projects')"><i class="fas fa-save"></i> Save
+                        &amp; Next ➡</button>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════
+             SECTION 5 — Research Projects (from File 1)
+        ═══════════════════════════════════════════════ -->
+            <section id="section5">
+                <div class="section-header">
+                    <div class="section-title"><i class="fas fa-flask"></i> Research Projects</div>
+                </div>
+
+                <h3>17. Details of Research Projects during 01.06.2024 to 31.05.2025 (Faculty and Ph.D. students)</h3>
+
+                <h4>17.1 Faculty Research</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No</th>
+                                <th>Name of Faculty Member</th>
+                                <th>Minor/Major/Ph.D./Other</th>
+                                <th>Title of Research Project</th>
+                                <th>Funding Agency</th>
+                                <th>Duration with Starting date. (and ending date in case of completed project)</th>
+                                <th>Grant (Rs.) or cost of project</th>
+                                <th>Status: Completed/ongoing/Sanctioned/ Submitted</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table17_1">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><select>
+                                        <option>Ongoing</option>
+                                        <option>Completed</option>
+                                        <option>Submitted</option>
+                                        <option>Sanctioned</option>
+                                    </select></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('table17_1')"><i class="fas fa-plus"></i>
+                    Add Row</button>
+
+                <h4>17.2 Patents</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th colspan="7" style="text-align:center;">Patents published / awarded / applied during
+                                    the year</th>
+                            </tr>
+                            <tr>
+                                <th class="sr-th">Sr. No</th>
+                                <th>Teacher Name</th>
+                                <th>Patent Details</th>
+                                <th>Patent Status</th>
+                                <th>Patent Number</th>
+                                <th>Date of Award</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table17_2">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="date"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('table17_2')"><i class="fas fa-plus"></i>
+                    Add Row</button>
+
+                <h4>17.3 Consultancy</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th colspan="7" style="text-align:center;font-weight:700;">Consultancy activities
+                                    conducted during the year</th>
+                            </tr>
+                            <tr>
+                                <th class="sr-th">Sr. No</th>
+                                <th>Name of Consultant/Department</th>
+                                <th>Name of the teachers involved in the consultancy activity</th>
+                                <th>Name of consultancy project</th>
+                                <th>Consulting/Sponsoring Agency</th>
+                                <th>Revenue generated (amount in rupees)</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table17_3">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('table17_3')"><i class="fas fa-plus"></i>
+                    Add Row</button>
+
+                <h4>17.4 Student Research</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No.</th>
+                                <th>Name of the Guide</th>
+                                <th>Internal/External</th>
+                                <th>Intake</th>
+                                <th>No. of Students Registered</th>
+                                <th>No. of Students Awarded Degree</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table17_4">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('table17_4')"><i class="fas fa-plus"></i>
+                    Add Row</button>
+
+                <h4>17.5 Ph.D. Students</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No.</th>
+                                <th class="sr-th">Name of the Research Scholar</th>
+                                <th class="sr-th">Name of the Guide</th>
+                                <th class="sr-th">Date of Registration</th>
+                                <th class="sr-th">Title of the Research Study</th>
+                                <th class="sr-th">Status: Ongoing / Completed in the year 2020-21 (Date of Notification)
+                                </th>
+                                <th class="sr-th" colspan="2" style="text-align:center;">Fellowship Received (if any)
+                                </th>
+                                <th class="sr-th">Action</th>
+                            </tr>
+                            <tr>
+                                <th class="sr-th"></th>
+                                <th class="sr-th"></th>
+                                <th class="sr-th"></th>
+                                <th class="sr-th"></th>
+                                <th class="sr-th"></th>
+                                <th class="sr-th"></th>
+                                <th class="sr-th">Type and Title of Fellowship</th>
+                                <th class="sr-th">Amount</th>
+                                <th class="sr-th"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="table17_5">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="date"></td>
+                                <td><input type="text"></td>
+                                <td><select>
+                                        <option>Ongoing</option>
+                                        <option>Completed</option>
+                                    </select></td>
+                                <td><input type="text"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('table17_5')"><i class="fas fa-plus"></i>
+                    Add Row</button>
+
+                <h4>17.6 PG Students Dissertation, Internships, and MOOCs</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No</th>
+                                <th>Name of Program</th>
+                                <th>Number of Students in Final Year</th>
+                                <th>Number of Students Opted for Research</th>
+                                <th>Number of Students Opted for Internship</th>
+                                <th>Number of Students Opted for MOOCs</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table17_6">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('table17_6')"><i class="fas fa-plus"></i>
+                    Add Row</button>
+
+                <h4>17.7 Internship</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No</th>
+                                <th>Name of Organization</th>
+                                <th>Type (Educational/Industry/organization etc.)</th>
+                                <th>Paid/Unpaid internship (If Paid, Amount of Stipend)</th>
+                                <th>No. of Students</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table17_7">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('table17_7')"><i class="fas fa-plus"></i>
+                    Add Row</button>
+
+                <div class="section-navigation">
+                    <button type="button" class="btn btn-outline"
+                        onclick="gotoNext('section4','nav-s4','Publications &amp; Research')">⬅ Previous</button>
+                    <button type="button" class="btn btn-primary"
+                        onclick="gotoNext('section6','nav-s6','Awards &amp; Exams')"><i class="fas fa-save"></i> Save
+                        &amp; Next ➡</button>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════
+             SECTION 6 — Awards & Exams (from File 1)
+        ═══════════════════════════════════════════════ -->
+            <section id="section6">
+                <div class="section-header">
+                    <div class="section-title"><i class="fas fa-trophy"></i> Awards &amp; Exams</div>
+                </div>
+
+                <h3>18. Details of the Honours / Awards / Prizes</h3>
+
+                <h4>18.1 Student Awards (Other than University awards received in convocation and other competitions)
+                </h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No.</th>
+                                <th>Name of Student</th>
+                                <th>Title of Award</th>
+                                <th>Name of Organization</th>
+                                <th>Purpose</th>
+                                <th>Date</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table18_1">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="date"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('table18_1')"><i class="fas fa-plus"></i>
+                    Add Row</button>
+
+                <h4>18.2 Faculty Awards (State / National / International Awards / Felicitations)</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No.</th>
+                                <th>Name of Faculty</th>
+                                <th>Title of Award</th>
+                                <th>Name of Organization</th>
+                                <th>Purpose</th>
+                                <th>Date</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table18_2">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="date"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('table18_2')"><i class="fas fa-plus"></i>
+                    Add Row</button>
+
+                <h4>19. Number of Students Who Passed Competitive Examinations</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No.</th>
+                                <th>Competitive Examination</th>
+                                <th>No. of Students Passed</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table19_1">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td>NET</td>
+                                <td><input type="number"></td>
+                            </tr>
+                            <tr>
+                                <td class="sr-td">2</td>
+                                <td>SET / SLET</td>
+                                <td><input type="number"></td>
+                            </tr>
+                            <tr>
+                                <td class="sr-td">3</td>
+                                <td>GATE</td>
+                                <td><input type="number"></td>
+                            </tr>
+                            <tr>
+                                <td class="sr-td">4</td>
+                                <td>CAT</td>
+                                <td><input type="number"></td>
+                            </tr>
+                            <tr>
+                                <td class="sr-td">5</td>
+                                <td>IAS / IPS</td>
+                                <td><input type="number"></td>
+                            </tr>
+                            <tr>
+                                <td class="sr-td">6</td>
+                                <td>UPSC</td>
+                                <td><input type="number"></td>
+                            </tr>
+                            <tr>
+                                <td class="sr-td">7</td>
+                                <td>MPSC</td>
+                                <td><input type="number"></td>
+                            </tr>
+                            <tr>
+                                <td class="sr-td">8</td>
+                                <td>Others</td>
+                                <td><input type="number"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="section-navigation">
+                    <button type="button" class="btn btn-outline"
+                        onclick="gotoNext('section5','nav-s5','Research Projects')">⬅ Previous</button>
+                    <button type="button" class="btn btn-primary"
+                        onclick="gotoNext('section7','nav-s7','Study Visits &amp; Visitors')"><i
+                            class="fas fa-save"></i> Save &amp; Next ➡</button>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════
+             SECTION 7 — Study Visits & Visitors (from File 1)
+        ═══════════════════════════════════════════════ -->
+            <section id="section7">
+                <div class="section-header">
+                    <div class="section-title"><i class="fas fa-globe"></i> Study Visits &amp; Visitors</div>
+                </div>
+
+                <h3>20. Details of the Study Visits of Students / Teaching Staff and Non-Teaching and visitors</h3>
+
+                <h4>20.1 Study Visits</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No</th>
+                                <th>Year</th>
+                                <th>Place of Visit</th>
+                                <th>Name of Accompanying Faculty</th>
+                                <th>Purpose</th>
+                                <th>Date</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table20_1">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><select>
+                                        <option>First Year</option>
+                                        <option>Second Year</option>
+                                        <option>Third Year</option>
+                                        <option>Fourth Year</option>
+                                    </select></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="date"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('table20_1')"><i class="fas fa-plus"></i>
+                    Add Row</button>
+
+                <h4>20.2 Visitors to Department/College/Institute (from Maharashtra or other States)</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No</th>
+                                <th>Name of Visitor</th>
+                                <th>Position, Institution name</th>
+                                <th>Place</th>
+                                <th>Purpose / Occasion</th>
+                                <th>Date</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table20_2">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="date"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('table20_2')"><i class="fas fa-plus"></i>
+                    Add Row</button>
+
+                <h4>20.3 International Visitors to the department/College/Institute</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No</th>
+                                <th>Name of Visitor</th>
+                                <th>Position, Institution name</th>
+                                <th>Place/Country</th>
+                                <th>Purpose / Occasion</th>
+                                <th>Date</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table20_3">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="date"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('table20_3')"><i class="fas fa-plus"></i>
+                    Add Row</button>
+
+                <h4>21. Social Initiatives Undertaken by Students</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No</th>
+                                <th>Social Initiative</th>
+                                <th>Place and Organization involved</th>
+                                <th>No. of Students Participated</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table21">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="number"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('table21')"><i class="fas fa-plus"></i>
+                    Add Row</button>
+
+                <h4>22. Campus Placement</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No</th>
+                                <th>Number of Organizations Visited (On Campus)</th>
+                                <th>Number of Students Participated (On Campus)</th>
+                                <th>Number of Students Placed (On Campus)</th>
+                                <th>Number of Students Placed (Off Campus)</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table22">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="number"></td>
+                                <td><input type="number"></td>
+                                <td><input type="number"></td>
+                                <td><input type="number"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('table22')"><i class="fas fa-plus"></i>
+                    Add Row</button>
+
+                <div class="section-navigation">
+                    <button type="button" class="btn btn-outline"
+                        onclick="gotoNext('section6','nav-s6','Awards &amp; Exams')">⬅ Previous</button>
+                    <button type="button" class="btn btn-primary"
+                        onclick="gotoNext('section8','nav-s8','Department Activities')"><i class="fas fa-save"></i> Save
+                        &amp; Next ➡</button>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════
+             SECTION 8 — Department Activities (from File 1)
+        ═══════════════════════════════════════════════ -->
+            <section id="section8">
+                <div class="section-header">
+                    <div class="section-title"><i class="fas fa-hands-helping"></i> Department Activities</div>
+                </div>
+
+                <h3>23. Other Activities of the Department / College</h3>
+
+                <h4>23.1 Workshops / Seminar for Students (Other State/regional/National level workshops will not be
+                    included here)</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No</th>
+                                <th>Title of the Workshop</th>
+                                <th>Date</th>
+                                <th>Venue</th>
+                                <th>Number of Students Participated</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table23_1">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><input type="date"></td>
+                                <td><input type="text"></td>
+                                <td><input type="number"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('table23_1')"><i class="fas fa-plus"></i>
+                    Add Row</button>
+
+                <h4>23.2 NSS Activities</h4>
+                <textarea id="nssActivitiesText" rows="4" style="width:100%;padding:8px;margin-bottom:10px;"
+                    placeholder="Enter NSS activities..."></textarea>
+                <p style="font-weight:600;font-size:0.82rem;color:var(--primary);margin-bottom:6px;"><i
+                        class="fas fa-upload" style="color:var(--accent);margin-right:5px;"></i> Upload Images /
+                    Documents</p>
+                <div class="upload-zone">
+                    <input type="file" multiple accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
+                        onchange="previewFiles(event,'nssPreview')">
+                    <span class="upload-icon-big"><i class="fas fa-cloud-upload-alt"></i></span>
+                    <div class="upload-title">Click to upload NSS activity images or documents</div>
+                    <div class="upload-hint">image/* · PDF · DOC · DOCX · XLS · XLSX · PPT · PPTX</div>
+                </div>
+                <div id="nssPreview" class="file-grid"></div>
+
+                <h4>23.3 Efforts taken to enhance the quality of teaching-learning</h4>
+                <textarea id="teachingQualityText" rows="4" style="width:100%;padding:8px;margin-bottom:15px;"
+                    placeholder="Describe efforts taken..."></textarea>
+
+                <h4>23.4 Any other student activities</h4>
+                <textarea id="otherActivitiesText" rows="4" style="width:100%;padding:8px;margin-bottom:10px;"
+                    placeholder="Enter other student activities..."></textarea>
+                <p style="font-weight:600;font-size:0.82rem;color:var(--primary);margin-bottom:6px;"><i
+                        class="fas fa-upload" style="color:var(--accent);margin-right:5px;"></i> Upload Images /
+                    Documents</p>
+                <div class="upload-zone">
+                    <input type="file" multiple accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
+                        onchange="previewFiles(event,'otherPreview')">
+                    <span class="upload-icon-big"><i class="fas fa-cloud-upload-alt"></i></span>
+                    <div class="upload-title">Click to upload activity images or documents</div>
+                    <div class="upload-hint">image/* · PDF · DOC · DOCX · XLS · XLSX · PPT · PPTX</div>
+                </div>
+                <div id="otherPreview" class="file-grid"></div>
+
+                <div class="section-navigation">
+                    <button type="button" class="btn btn-outline"
+                        onclick="gotoNext('section7','nav-s7','Study Visits &amp; Visitors')">⬅ Previous</button>
+                    <button type="button" class="btn btn-primary"
+                        onclick="gotoNext('section9','nav-s9','MOUs &amp; Donors')"><i class="fas fa-save"></i> Save
+                        &amp; Next ➡</button>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════
+             SECTION 9 — MOUs & Donors (from File 1)
+        ═══════════════════════════════════════════════ -->
+            <section id="section9">
+                <div class="section-header">
+                    <div class="section-title"><i class="fas fa-handshake"></i> MOUs &amp; Donors</div>
+                </div>
+
+                <h4>24. MOUs Signed (by the University for the Department)</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No</th>
+                                <th>Name of Institution</th>
+                                <th>National / International</th>
+                                <th>Nature of Collaboration</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table24">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text" placeholder="Enter Institution Name"></td>
+                                <td><select>
+                                        <option>Select</option>
+                                        <option>National</option>
+                                        <option>International</option>
+                                    </select></td>
+                                <td><input type="text" placeholder="Enter Collaboration Details"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('table24')"><i class="fas fa-plus"></i>
+                    Add Row</button>
+
+                <h4>25. List of Donors</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No</th>
+                                <th>Name of the Donor (Individual/Organization) Address</th>
+                                <th>Amount of Donation</th>
+                                <th>Purpose of the Donation</th>
+                                <th>Date on which received</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table25">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text" placeholder="Donor Name &amp; Address"></td>
+                                <td><input type="number" placeholder="Amount"></td>
+                                <td><input type="text" placeholder="Purpose"></td>
+                                <td><input type="date"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('table25')"><i class="fas fa-plus"></i>
+                    Add Row</button>
+
+                <h4>25.a Total Corpus generated (if any)</h4>
+                <input type="number" id="totalCorpusInput" placeholder="Enter Total Corpus Amount"
+                    style="width:300px;padding:8px;margin-top:10px;">
+
+                <div class="section-navigation">
+                    <button type="button" class="btn btn-outline"
+                        onclick="gotoNext('section8','nav-s8','Department Activities')">⬅ Previous</button>
+                    <button type="button" class="btn btn-primary"
+                        onclick="gotoNext('section10','nav-s10','Alumni Association')"><i class="fas fa-save"></i> Save
+                        &amp; Next ➡</button>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════
+             SECTION 10 — Alumni Association (from File 1)
+        ═══════════════════════════════════════════════ -->
+            <section id="section10">
+                <div class="section-header">
+                    <div class="section-title"><i class="fas fa-user-graduate"></i> Alumni Association</div>
+                </div>
+
+                <h4>26. Alumni Association</h4>
+                <select id="alumniSelect" onchange="toggleAlumni(this.value)">
+                    <option value="">Select</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+
+                <div id="alumniFileUpload" style="display:none;margin-top:12px;">
+                    <div class="upload-zone">
+                        <input type="file" id="alumniFiles" multiple accept=".pdf,.doc,.docx,image/*"
+                            onchange="renderAlumniFiles()">
+                        <span class="upload-icon-big"><i class="fas fa-file-upload"></i></span>
+                        <div class="upload-title">Upload Alumni related files</div>
+                        <div class="upload-hint">PDF · DOC · DOCX · Images</div>
+                    </div>
+                    <div class="file-grid" id="alumniFileList"></div>
+                </div>
+
+                <h4>26.1 Do you have Department/College Alumni Association?</h4>
+                <select id="alumniSelectYesNo">
+                    <option value="">Select</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+
+                <h4>26.2 If Yes, what are activities undertaken?</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No.</th>
+                                <th>Programmes organized for/by Alumni</th>
+                                <th>Date</th>
+                                <th>Purpose</th>
+                                <th>Number of Alumni present</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table26_2">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td>Alumni Meet</td>
+                                <td><input type="date"></td>
+                                <td><input type="text"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                            <tr>
+                                <td class="sr-td">2</td>
+                                <td>Publication of Newsletter/Journal</td>
+                                <td><input type="date"></td>
+                                <td><input type="text"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                            <tr>
+                                <td class="sr-td">3</td>
+                                <td>Trip/Tour</td>
+                                <td><input type="date"></td>
+                                <td><input type="text"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                            <tr>
+                                <td class="sr-td">4</td>
+                                <td>Project (Research/Extension)</td>
+                                <td><input type="date"></td>
+                                <td><input type="text"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                            <tr>
+                                <td class="sr-td">5</td>
+                                <td>Donation Drive</td>
+                                <td><input type="date"></td>
+                                <td><input type="text"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                            <tr>
+                                <td class="sr-td">6</td>
+                                <td>Any other (Pl specify)</td>
+                                <td><input type="date"></td>
+                                <td><input type="text"></td>
+                                <td><input type="number" value="0"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('table26_2')"><i class="fas fa-plus"></i>
+                    Add Row</button>
+
+                <h4>27. Obituaries (if any)</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sr-th">Sr. No</th>
+                                <th>Name</th>
+                                <th class="action-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table26">
+                            <tr>
+                                <td class="sr-td">1</td>
+                                <td><input type="text"></td>
+                                <td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addRowClone('table26')"><i class="fas fa-plus"></i>
+                    Add Name</button>
+
+                <h4>28. Any other, you wish to add for the Annual Report of the University</h4>
+                <textarea id="otherInfoText" placeholder="Enter Information"
+                    style="width:100%;height:100px;padding:8px;margin-top:10px;"></textarea>
+                <div style="margin-top:14px;">
+                    <p style="font-weight:600;font-size:0.83rem;color:var(--primary);margin-bottom:6px;">Upload related
+                        files (PDF, Word, Images):</p>
+                    <div class="upload-zone">
+                        <input type="file" id="otherInfoFiles" multiple accept=".pdf,.doc,.docx,image/*"
+                            onchange="renderOtherFiles()">
+                        <span class="upload-icon-big"><i class="fas fa-cloud-upload-alt"></i></span>
+                        <div class="upload-title">Click to upload related files</div>
+                        <div class="upload-hint">PDF · DOC · DOCX · Images</div>
+                    </div>
+                    <div class="file-grid" id="otherInfoFileList"></div>
+                </div>
+
+                <h3>Name of HOD/Principal/Director</h3>
+                <input type="text" id="hodName" placeholder="Enter Name"
+                    style="width:320px;padding:8px;margin-top:5px;">
+
+                <h3>Signature with Seal and Date</h3>
+                <div class="sig-box">
+                    <input type="file" id="hodSignatureFile" accept="image/*" onchange="previewSig(event)">
+                    <div id="sigPlaceholder">
+                        <div style="font-size:1.6rem;color:var(--accent);margin-bottom:7px;"><i
+                                class="fas fa-signature"></i></div>
+                        <div style="font-size:0.84rem;font-weight:600;color:var(--primary);">Click to upload Signature
+                            with Seal</div>
+                        <div style="font-size:0.70rem;color:var(--muted);margin-top:3px;">JPG · PNG — max 1 MB</div>
+                    </div>
+                    <img id="sigPreviewImg" src="" alt="Signature Preview"
+                        style="display:none;max-width:200px;border:1px solid var(--border);padding:5px;border-radius:8px;margin-top:8px;">
+                </div>
+                <div style="margin-top:12px;">
+                    <label style="font-size:0.84rem;font-weight:600;color:var(--primary);">Date (dd/mm/yyyy):</label>
+                    <input type="date" id="hodDate" style="padding:6px;width:200px;margin-left:8px;">
+                </div>
+
+                <div class="section-navigation">
+                    <button type="button" class="btn btn-outline"
+                        onclick="gotoNext('section9','nav-s9','MOUs &amp; Donors')">⬅ Previous</button>
+                    <button type="button" class="btn btn-success" onclick="submitReport()"><i
+                            class="fas fa-paper-plane"></i> Submit Annual Report</button>
+                </div>
+            </section>
+
+        </div><!-- /content -->
+    </div><!-- /main -->
+
+    <!-- DOWNLOAD POPUP -->
+    <div id="downloadPopup">
+        <div class="modal-box">
+            <div class="modal-icon"><i class="fas fa-check-circle"></i></div>
+            <h2 id="dlPopupTitle">Download Report</h2>
+            <p id="dlPopupMsg">Choose your preferred format:</p>
+            <div class="download-options">
+                <button class="btn-danger-dl" onclick="downloadPDF()">
+                    <i class="fas fa-file-pdf"></i><span>PDF</span>
+                    <small id="dlPDFName" style="font-size:0.68rem;opacity:0.7;"></small>
+                </button>
+            </div>
+            <div class="modal-actions" style="margin-top:16px;">
+                <button class="btn btn-outline" onclick="closeDownloadPopup()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- OFFLINE PANEL -->
+    <div id="offlinePanel">
+        <div class="saved-box">
+            <h2><i class="fas fa-wifi"></i> Offline Queue</h2>
+            <p class="sub">Reports waiting to sync when you reconnect</p>
+            <div id="offlineQueueList"></div>
+            <div style="margin-top:16px;text-align:right;"><button class="btn btn-outline"
+                    onclick="closeOfflinePanel()">Close</button></div>
+        </div>
+    </div>
+
+    <!-- CONFIRM DELETE -->
+    <div id="cfModal">
+        <div class="cfbox">
+            <div class="ci"><i class="fas fa-trash-alt"></i></div>
+            <h3>Delete Report?</h3>
+            <p id="cfMsg">This cannot be undone.</p>
+            <div class="cfacts">
+                <button class="btn btn-outline" onclick="closeCf()">Cancel</button>
+                <button class="btn btn-danger" id="cfBtn">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div id="toast"><i class="fas fa-check-circle"></i><span id="toast-msg">Done</span></div>
+
+    <script>
+        const API = 'http://localhost:3001/api';
+        let isOnline = navigator.onLine;
+        let editingReportId = null;
+
+        /* ── AUTH GUARD ── */
+        const _token = localStorage.getItem('sndt_token');
+        const _role = localStorage.getItem('sndt_role');
+        const _deptName = localStorage.getItem('sndt_deptName');
+        const _username = localStorage.getItem('sndt_username');
+        if (!_token) { window.location.href = 'login.html'; }
+        document.getElementById('userTag').textContent = _username ? `👤 ${_username}` : '';
+
+        function authHeaders() {
+            return { 'Content-Type': 'application/json', 'x-auth-token': _token };
+        }
+
+        /* ── ONLINE/OFFLINE ── */
+        window.addEventListener('online', () => { isOnline = true; updateOfflineBanner(); syncOfflineQueue(); });
+        window.addEventListener('offline', () => { isOnline = false; updateOfflineBanner(); });
+        function updateOfflineBanner() {
+            document.getElementById('offlineBanner').style.display = isOnline ? 'none' : 'flex';
+        }
+        updateOfflineBanner();
+
+        /* ── INDEXEDDB ── */
+        let db = null;
+        function openDB() {
+            return new Promise((resolve, reject) => {
+                if (db) { resolve(db); return; }
+                const req = indexedDB.open('SNDTReportDB', 2);
+                req.onupgradeneeded = e => {
+                    const d = e.target.result;
+                    if (!d.objectStoreNames.contains('drafts')) d.createObjectStore('drafts', { keyPath: 'draftKey' });
+                    if (!d.objectStoreNames.contains('queue')) d.createObjectStore('queue', { keyPath: 'queueId', autoIncrement: true });
+                };
+                req.onsuccess = e => { db = e.target.result; resolve(db); };
+                req.onerror = e => reject(e);
+            });
+        }
+        async function idbPut(store, obj) {
+            const d = await openDB();
+            return new Promise((res, rej) => { const tx = d.transaction(store, 'readwrite'); tx.objectStore(store).put(obj); tx.oncomplete = res; tx.onerror = rej; });
+        }
+        async function idbGetAll(store) {
+            const d = await openDB();
+            return new Promise((res, rej) => { const tx = d.transaction(store, 'readonly'); const req = tx.objectStore(store).getAll(); req.onsuccess = () => res(req.result); req.onerror = rej; });
+        }
+        async function idbDelete(store, key) {
+            const d = await openDB();
+            return new Promise((res, rej) => { const tx = d.transaction(store, 'readwrite'); tx.objectStore(store).delete(key); tx.oncomplete = res; tx.onerror = rej; });
+        }
+
+        /* ── YEAR ── */
+        function updateYear(val) {
+            const display = val.trim().replace('-', '–');
+            document.getElementById('bannerYear').textContent = display || '—';
+            document.getElementById('sidebarYear').textContent = display || 'Select Year';
+        }
+
+        /* ── DASHBOARD ── */
+        function showDashboard() {
+            document.getElementById('dashSection').style.display = 'block';
+            document.querySelectorAll('section').forEach(s => { s.style.display = 'none'; s.classList.remove('active'); });
+            document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
+            document.getElementById('nav-dash').classList.add('active');
+            document.getElementById('section-badge').textContent = 'My Reports';
+            document.getElementById('btnBackDash').style.display = 'none';
+            document.getElementById('btnDownload').style.display = 'none';
+            document.getElementById('btnSubmit').style.display = 'none';
+            ['nav-s1', 'nav-s2', 'nav-s3', 'nav-s4', 'nav-s5', 'nav-s6', 'nav-s7', 'nav-s8', 'nav-s9', 'nav-s10'].forEach(id => {
+                document.getElementById(id).style.display = 'none';
+            });
+            document.getElementById('formNavLabel').style.display = 'none';
+            document.getElementById('progress-fill').style.width = '0%';
+            document.getElementById('pct-label').textContent = '0%';
+            editingReportId = null;
+            loadDashboard();
+        }
+
+        function showFormNav() {
+            ['nav-s1', 'nav-s2', 'nav-s3', 'nav-s4', 'nav-s5', 'nav-s6', 'nav-s7', 'nav-s8', 'nav-s9', 'nav-s10'].forEach(id => {
+                document.getElementById(id).style.display = 'flex';
+            });
+            document.getElementById('formNavLabel').style.display = 'block';
+            document.getElementById('btnBackDash').style.display = 'flex';
+            document.getElementById('btnDownload').style.display = 'flex';
+            document.getElementById('btnSubmit').style.display = 'flex';
+        }
+
+        /* ── SHOW SECTION ── */
+        function showSection(sId, nId, title) {
+            document.getElementById('dashSection').style.display = 'none';
+            document.querySelectorAll('section').forEach(s => { s.style.display = 'none'; s.classList.remove('active'); });
+            const sec = document.getElementById(sId);
+            if (sec) { sec.style.display = 'block'; sec.classList.add('active'); }
+            document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
+            const nav = document.getElementById(nId);
+            if (nav) nav.classList.add('active');
+            document.getElementById('section-badge').textContent = title || '';
+            const num = parseInt(sId.replace('section', ''));
+            const pct = Math.round((num / 10) * 100);
+            document.getElementById('progress-fill').style.width = pct + '%';
+            document.getElementById('pct-label').textContent = pct + '%';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /* ── NEW REPORT ── */
+        function startNewReport() {
+            editingReportId = null;
+            resetForm();
+            if (_deptName) {
+                document.getElementById('s1_deptName').value = _deptName;
+                document.getElementById('s1_deptName').readOnly = true;
+            }
+            showFormNav();
+            showSection('section1', 'nav-s1', 'Basic Department Details');
+        }
+
+        /* ── SAVE & NEXT ── */
+        async function gotoNext(sId, nId, title) {
+            try {
+                const data = collectData();
+                const draftKey = ((data.academicYear || 'draft') + '_' + (data.section1?.departmentName || 'draft')).replace(/\s+/g, '_');
+                await idbPut('drafts', { draftKey, ...data, savedAt: new Date().toISOString() });
+                showToast('Section saved locally ✅', 'success');
+            } catch (e) { console.warn('Draft save failed:', e); }
+            showSection(sId, nId, title);
+        }
+
+        /* ── DASHBOARD LOAD ── */
+        async function loadDashboard() {
+            document.getElementById('reportsListWrap').innerHTML = '<div class="dash-spinner"><div class="sp"></div><p style="color:var(--muted);font-size:0.83rem;">Loading from database…</p></div>';
+            try {
+                const res = await fetch(`${API}/reports`, { headers: authHeaders() });
+                const data = await res.json();
+                if (!data.success) throw new Error(data.error);
+                renderDashboard(data.reports || []);
+            } catch (err) {
+                document.getElementById('reportsListWrap').innerHTML = `<div class="no-reports-msg"><i class="fas fa-plug"></i><p>Cannot connect to server.<br><small style="color:var(--danger)">${err.message}</small><br><small>Make sure <code>node server.js</code> is running on port 3001.</small></p></div>`;
+            }
+        }
+
+        function renderDashboard(reports) {
+            document.getElementById('dsTotalReports').textContent = reports.length;
+            const years = [...new Set(reports.map(r => r.academicYear).filter(Boolean))].sort().reverse();
+            document.getElementById('dsLatestYear').textContent = years[0] || '—';
+            const lastUpdated = reports.reduce((a, r) => { const d = new Date(r.updatedAt || 0); return d > a ? d : a; }, new Date(0));
+            document.getElementById('dsLastSaved').textContent = reports.length ? lastUpdated.toLocaleDateString('en-IN', { day: '2-digit', month: 'short' }) : '—';
+            if (!reports.length) {
+                document.getElementById('reportsListWrap').innerHTML = `<div class="no-reports-msg"><i class="fas fa-inbox"></i><p>No reports yet. Click <strong>"Create New Annual Report"</strong> to get started.</p></div>`;
+                return;
+            }
+            const byYear = {};
+            reports.forEach(r => { const y = r.academicYear || 'Unknown'; if (!byYear[y]) byYear[y] = []; byYear[y].push(r); });
+            let html = '';
+            Object.keys(byYear).sort().reverse().forEach(year => {
+                html += `<div class="year-group"><div class="year-group-title"><i class="fas fa-calendar-alt"></i> Academic Year: ${year}</div>`;
+                byYear[year].forEach(r => {
+                    const dept = r.section1?.departmentName || 'Unnamed Department';
+                    const updated = r.updatedAt ? new Date(r.updatedAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) : '—';
+                    const isAdmin = _role === 'admin';
+                    html += `<div class="rcard"><div class="rcard-left"><div class="rcard-icon"><i class="fas fa-file-alt"></i></div><div><div class="rcard-title">${dept}</div><div class="rcard-meta"><span class="pill pill-green"><i class="fas fa-check-circle"></i> Saved</span> &nbsp; Last updated: ${updated} &nbsp; By: ${r.submittedBy || '—'}</div></div></div><div class="rcard-actions"><button class="btn btn-outline btn-sm" onclick="editReport('${r._id}')"><i class="fas fa-edit"></i> Edit</button>${isAdmin ? `<button class="btn btn-danger btn-sm" onclick="confirmDelReport('${r._id}','${dept.replace(/'/g, "\\'")}')"><i class="fas fa-trash"></i></button>` : ''}</div></div>`;
+                });
+                html += '</div>';
+            });
+            document.getElementById('reportsListWrap').innerHTML = html;
+        }
+
+        /* ── EDIT REPORT ── */
+        async function editReport(id) {
+            showToast('Loading report…');
+            try {
+                const res = await fetch(`${API}/report/${id}`, { headers: authHeaders() });
+                const data = await res.json();
+                if (!data.success) throw new Error(data.error);
+                editingReportId = id;
+                resetForm();
+                populateForm(data.report);
+                showFormNav();
+                showSection('section1', 'nav-s1', 'Basic Department Details');
+                showToast('Report loaded ✅', 'success');
+            } catch (err) { showToast('Error: ' + err.message, 'error'); }
+        }
+
+        /* ── DELETE ── */
+        let _delId = null;
+        function confirmDelReport(id, name) {
+            _delId = id;
+            document.getElementById('cfMsg').textContent = `"${name}" will be permanently deleted.`;
+            document.getElementById('cfModal').classList.add('open');
+            document.getElementById('cfBtn').onclick = doDeleteReport;
+        }
+        function closeCf() { document.getElementById('cfModal').classList.remove('open'); _delId = null; }
+        async function doDeleteReport() {
+            closeCf();
+            try {
+                const res = await fetch(`${API}/report/${_delId}`, { method: 'DELETE', headers: authHeaders() });
+                const data = await res.json();
+                if (!data.success) throw new Error(data.error);
+                showToast('Report deleted ✅', 'success');
+                loadDashboard();
+            } catch (err) { showToast('Delete failed: ' + err.message, 'error'); }
+            _delId = null;
+        }
+
+        /* ── RESET FORM ── */
+        function resetForm() {
+            document.getElementById('academicYear').value = '';
+            document.getElementById('bannerYear').textContent = '—';
+            document.getElementById('sidebarYear').textContent = 'Select Year';
+            ['s1_deptName', 's1_address', 's1_yearEstab', 's1_hodName', 's1_hodInCharge', 's1_telephone', 's1_fax', 's1_email', 's1_website'].forEach(id => {
+                const el = document.getElementById(id); if (el) { el.value = ''; el.readOnly = false; }
+            });
+            ['programmeTable', 'infraTable', 'intakeTable'].forEach(id => {
+                const t = document.getElementById(id); if (t) t.querySelector('tbody').innerHTML = '';
+            });
+            addRowProgramme(); addRowInfra(); addRowIntake();
+            ['categoryAdmissionTable', 'yearAdmissionTable', 'scholarshipTable', 'facultyTable', 'guestFacultyTable', 'nonTeachingTable',
+                'sec3_table121', 'sec3_table122', 'sec3_table13', 'sec3_table14',
+                'table16_1', 'table16_2', 'table16_3', 'table16_4', 'table16_5',
+                'table17_1', 'table17_2', 'table17_3', 'table17_4', 'table17_5', 'table17_6', 'table17_7',
+                'table18_1', 'table18_2', 'table19_1',
+                'table20_1', 'table20_2', 'table20_3', 'table21', 'table22', 'table23_1',
+                'table24', 'table25', 'table26', 'table26_2'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.querySelectorAll('input,select,textarea').forEach(i => { i.value = i.type === 'number' ? 0 : ''; });
+                });
+            ['nssActivitiesText', 'teachingQualityText', 'otherActivitiesText', 'otherInfoText'].forEach(id => {
+                const el = document.getElementById(id); if (el) el.value = '';
+            });
+            const tc = document.getElementById('totalCorpusInput'); if (tc) tc.value = 0;
+            const asel = document.getElementById('alumniSelect'); if (asel) asel.value = '';
+            const ayesno = document.getElementById('alumniSelectYesNo'); if (ayesno) ayesno.value = '';
+            const hn = document.getElementById('hodName'); if (hn) hn.value = '';
+            const hd = document.getElementById('hodDate'); if (hd) hd.value = '';
+            const sigImg = document.getElementById('sigPreviewImg');
+            if (sigImg) { sigImg.src = ''; sigImg.style.display = 'none'; }
+            const sigPh = document.getElementById('sigPlaceholder');
+            if (sigPh) sigPh.style.display = 'block';
+        }
+
+        /* ── TABLE HELPERS ── */
+        function addRowProgramme() {
+            const tbody = document.querySelector('#programmeTable tbody');
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td><select><option>Degree</option><option>Diploma</option><option>Certificate Programme</option><option>Online Programme</option></select></td><td><input type="text" placeholder="Enter Programme Name"></td><td><input type="number" placeholder="Enter Year"></td><td><select><option>Aided</option><option>Unaided</option></select></td><td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>`;
+            tbody.appendChild(tr);
+        }
+        function addRowInfra() {
+            const tbody = document.querySelector('#infraTable tbody');
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td><input type="text" placeholder="Example: Classroom 1"></td><td><input type="number" placeholder="Area"></td><td><input type="text" placeholder="Example: Lab 1"></td><td><input type="number" placeholder="Area"></td><td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>`;
+            tbody.appendChild(tr);
+        }
+        function addRowIntake() {
+            const tbody = document.querySelector('#intakeTable tbody');
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td><input type="text" placeholder="Enter Programme Name"></td><td><input type="number" value="0"></td><td><input type="number" value="0"></td><td><input type="number" value="0"></td><td><input type="number" value="0"></td><td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>`;
+            tbody.appendChild(tr);
+        }
+        function addRowClone(tbodyId) {
+            const tbody = document.getElementById(tbodyId); if (!tbody) return;
+            const newRow = tbody.rows[0].cloneNode(true);
+            newRow.querySelectorAll('input').forEach(inp => { if (!inp.hasAttribute('readonly')) inp.value = inp.type === 'number' ? 0 : ''; });
+            newRow.querySelectorAll('select').forEach(sel => sel.selectedIndex = 0);
+            const sr = newRow.cells[0]; if (sr && !sr.querySelector('input,select')) sr.textContent = tbody.rows.length + 1;
+            tbody.appendChild(newRow);
+        }
+        function addRowCloneById(tableId) {
+            const table = document.getElementById(tableId); if (!table) return;
+            const tbody = table.querySelector('tbody');
+            const newRow = tbody.rows[0].cloneNode(true);
+            newRow.querySelectorAll('input').forEach(inp => { if (!inp.hasAttribute('readonly')) inp.value = inp.type === 'number' ? 0 : ''; });
+            newRow.querySelectorAll('select').forEach(sel => sel.selectedIndex = 0);
+            const sr = newRow.cells[0]; if (sr && !sr.querySelector('input,select')) sr.textContent = tbody.rows.length + 1;
+            tbody.appendChild(newRow);
+        }
+        document.addEventListener('click', function (e) {
+            if (e.target.classList.contains('delete-row')) {
+                const row = e.target.closest('tr'); const tbody = row.closest('tbody');
+                if (tbody && tbody.rows.length > 1) {
+                    row.remove();
+                    Array.from(tbody.rows).forEach((r, i) => { const c = r.cells[0]; if (c && !c.querySelector('input,select')) c.textContent = i + 1; });
+                } else alert('At least one row must remain!');
+            }
+        });
+
+        /* ── FILE UPLOADS ── */
+        function previewFiles(event, previewId) {
+            const preview = document.getElementById(previewId);
+            Array.from(event.target.files).forEach(file => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const wrap = document.createElement('div'); wrap.className = 'img-preview-wrap';
+                        wrap.innerHTML = `<img src="${e.target.result}" alt=""><button class="chip-del" onclick="this.parentElement.remove()">✕</button>`;
+                        preview.appendChild(wrap);
+                    }; reader.readAsDataURL(file);
+                } else {
+                    const chip = document.createElement('div'); chip.className = 'file-chip';
+                    chip.innerHTML = `<i class="fas fa-file-alt" style="color:var(--accent)"></i>${file.name}<button class="chip-del" onclick="this.parentElement.remove()">✕</button>`;
+                    preview.appendChild(chip);
+                }
+            });
+        }
+
+        /* ── ALUMNI ── */
+        function toggleAlumni(val) { const el = document.getElementById('alumniFileUpload'); if (el) el.style.display = val === 'Yes' ? 'block' : 'none'; }
+        function renderAlumniFiles() {
+            const input = document.getElementById('alumniFiles'); const list = document.getElementById('alumniFileList'); list.innerHTML = '';
+            Array.from(input.files).forEach((file, idx) => { const chip = document.createElement('div'); chip.className = 'file-chip'; chip.innerHTML = `<i class="fas fa-file" style="color:var(--accent)"></i>${file.name}<button class="chip-del" onclick="deleteAlumniFile(${idx})">✕</button>`; list.appendChild(chip); });
+        }
+        function deleteAlumniFile(index) { const input = document.getElementById('alumniFiles'); const dt = new DataTransfer(); Array.from(input.files).forEach((f, i) => { if (i !== index) dt.items.add(f); }); input.files = dt.files; renderAlumniFiles(); }
+        function renderOtherFiles() {
+            const input = document.getElementById('otherInfoFiles'); const list = document.getElementById('otherInfoFileList'); list.innerHTML = '';
+            Array.from(input.files).forEach((file, idx) => { const chip = document.createElement('div'); chip.className = 'file-chip'; chip.innerHTML = `<i class="fas fa-file" style="color:var(--accent)"></i>${file.name}<button class="chip-del" onclick="deleteOtherFile(${idx})">✕</button>`; list.appendChild(chip); });
+        }
+        function deleteOtherFile(index) { const input = document.getElementById('otherInfoFiles'); const dt = new DataTransfer(); Array.from(input.files).forEach((f, i) => { if (i !== index) dt.items.add(f); }); input.files = dt.files; renderOtherFiles(); }
+
+        /* ── SIGNATURE ── */
+        function previewSig(event) {
+            const file = event.target.files[0]; if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById('sigPreviewImg').src = e.target.result;
+                document.getElementById('sigPreviewImg').style.display = 'block';
+                document.getElementById('sigPlaceholder').style.display = 'none';
+            }; reader.readAsDataURL(file);
+        }
+
+        /* ── TOAST ── */
+        function showToast(msg, type = 'info') {
+            const t = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = msg;
+            t.className = type === 'success' ? 'show success' : type === 'error' ? 'show error' : 'show';
+            clearTimeout(t._t); t._t = setTimeout(() => t.className = '', 3500);
+        }
+
+        /* ── MODALS ── */
+        function openDownloadPopup() {
+            const fname = buildFileName();
+            document.getElementById('dlPopupTitle').textContent = 'Download Report';
+            document.getElementById('dlPopupMsg').textContent = 'Choose format:';
+            document.getElementById('dlPDFName').textContent = fname + '.pdf';
+            document.getElementById('downloadPopup').classList.add('open');
+        }
+        function closeDownloadPopup() { document.getElementById('downloadPopup').classList.remove('open'); }
+        function openOfflinePanel() { renderOfflineQueue(); document.getElementById('offlinePanel').classList.add('open'); }
+        function closeOfflinePanel() { document.getElementById('offlinePanel').classList.remove('open'); }
+
+        /* ── COLLECT DATA ── */
+        function collectData() {
+            const academicYear = document.getElementById('academicYear')?.value || '';
+            const s1 = {
+                departmentName: document.getElementById('s1_deptName')?.value || '',
+                address: document.getElementById('s1_address')?.value || '',
+                yearOfEstablishment: document.getElementById('s1_yearEstab')?.value || '',
+                hodName: document.getElementById('s1_hodName')?.value || '',
+                hodInCharge: document.getElementById('s1_hodInCharge')?.value || '',
+                telephone: document.getElementById('s1_telephone')?.value || '',
+                fax: document.getElementById('s1_fax')?.value || '',
+                email: document.getElementById('s1_email')?.value || '',
+                website: document.getElementById('s1_website')?.value || '',
+                programmes: tableToArray('programmeTable', ['type', 'name', 'yearOfStarting', 'aidedUnaided']),
+                infrastructure: tableToArray('infraTable', ['classroom', 'classroomArea', 'lab', 'labArea']),
+                intakeCapacity: tableToArray('intakeTable', ['programme', 'ug', 'pg', 'mphil', 'phd']),
+            };
+            const s2 = {
+                categoryAdmission: tableToArray('categoryAdmissionTable', ['programme', 'open', 'sc', 'st', 'ntdt', 'obc', 'sbc']),
+                yearAdmission: tableToArray('yearAdmissionTable', ['degree', 'programme', 'year1', 'year2', 'year3', 'year4', 'total']),
+                scholarships: tableToArray('scholarshipTable', ['_sr', 'name', 'studentsReceiving', 'organization', 'totalAmount']),
+                faculty: tableToArray('facultyTable', ['_sr', 'name', 'qualification', 'subject', 'designation', 'natureOfAppointment', 'category', 'dateOfAppointment']),
+                guestFaculty: tableToArray('guestFacultyTable', ['_sr', 'name', 'positionDetails']),
+                nonTeaching: tableToArray('nonTeachingTable', ['_sr', 'name', 'designation', 'natureOfAppointment', 'dateOfAppointment', 'category']),
+            };
+            const s3 = {
+                organizedEvents: tableToArray('sec3_table121', ['_sr', 'title', 'dateVenue', 'sponsoringAgency', 'noOfParticipants', 'level']),
+                otherEvents: tableToArray('sec3_table122', ['_sr', 'title', 'dateVenue', 'sponsoringAgency', 'noOfParticipants', 'level']),
+                facultyPapers: tableToArray('sec3_table13', ['_sr', 'facultyName', 'paperTitle', 'conferenceTitle', 'dateVenueOrganizer', 'level', 'chaired']),
+                facultyWorkshops: tableToArray('sec3_table14', ['_sr', 'facultyName', 'workshopTitle', 'dateVenueOrganizer', 'level', 'resourcePerson']),
+                facultyDevelopment: tableToArray('facultyDevTable', ['programme', 'title', 'noOfFaculty', 'dates']),
+            };
+            const s4 = {
+                journalArticles: tableToArray('table16_1', ['_sr', 'authors', 'facultyStudent', 'title', 'journal', 'dateOfPublication', 'volumeISSN', 'peerReview']),
+                books: tableToArray('table16_2', ['_sr', 'authors', 'facultyStudent', 'title', 'place', 'publisher', 'yearISBN']),
+                chapters: tableToArray('table16_3', ['_sr', 'authors', 'facultyStudent', 'chapterTitle', 'bookTitle', 'place', 'publisher', 'yearISBN']),
+                conferenceProceedings: tableToArray('table16_4', ['_sr', 'authors', 'facultyStudent', 'paperTitle', 'conferenceName', 'publisherPlace', 'yearISBN', 'link']),
+                otherPublications: tableToArray('table16_5', ['_sr', 'authors', 'facultyStudent', 'title', 'publisherPlace', 'yearISBN', 'link']),
+            };
+            const s5 = {
+                facultyResearch: tableToArray('table17_1', ['_sr', 'facultyName', 'type', 'title', 'fundingAgency', 'duration', 'grant', 'status']),
+                patents: tableToArray('table17_2', ['_sr', 'teacherName', 'patentDetails', 'status', 'patentNumber', 'dateOfAward']),
+                consultancy: tableToArray('table17_3', ['_sr', 'consultantDept', 'teachers', 'projectName', 'agency', 'revenue']),
+                studentResearch: tableToArray('table17_4', ['_sr', 'guideName', 'internalExternal', 'intake', 'registered', 'awarded']),
+                phdStudents: tableToArray('table17_5', ['_sr', 'scholarName', 'guideName', 'dateOfRegistration', 'title', 'status', 'fellowshipType', 'fellowshipAmount']),
+                pgDissertation: tableToArray('table17_6', ['_sr', 'programName', 'finalYear', 'research', 'internship', 'moocs']),
+                internships: tableToArray('table17_7', ['_sr', 'orgName', 'type', 'paidUnpaid', 'noOfStudents']),
+            };
+            const s6 = {
+                studentAwards: tableToArray('table18_1', ['_sr', 'studentName', 'awardTitle', 'organization', 'purpose', 'date']),
+                facultyAwards: tableToArray('table18_2', ['_sr', 'facultyName', 'awardTitle', 'organization', 'purpose', 'date']),
+                competitiveExams: tableToArray('table19_1', ['_sr', 'exam', 'studentsPassed']),
+            };
+            const s7 = {
+                studyVisits: tableToArray('table20_1', ['_sr', 'year', 'place', 'faculty', 'purpose', 'date']),
+                domesticVisitors: tableToArray('table20_2', ['_sr', 'name', 'position', 'place', 'purpose', 'date']),
+                intlVisitors: tableToArray('table20_3', ['_sr', 'name', 'position', 'country', 'purpose', 'date']),
+                socialInitiatives: tableToArray('table21', ['_sr', 'initiative', 'placeOrg', 'noOfStudents']),
+                campusPlacement: tableToArray('table22', ['_sr', 'orgVisited', 'studentsParticipated', 'placedOnCampus', 'placedOffCampus']),
+            };
+            const s8 = {
+                workshops: tableToArray('table23_1', ['_sr', 'title', 'date', 'venue', 'noOfStudents']),
+                nssActivities: document.getElementById('nssActivitiesText')?.value || '',
+                teachingQuality: document.getElementById('teachingQualityText')?.value || '',
+                otherActivities: document.getElementById('otherActivitiesText')?.value || '',
+            };
+            const s9 = {
+                mous: tableToArray('table24', ['_sr', 'institution', 'nationalIntl', 'collaboration']),
+                donors: tableToArray('table25', ['_sr', 'donorName', 'amount', 'purpose', 'date']),
+                totalCorpus: parseFloat(document.getElementById('totalCorpusInput')?.value) || 0,
+            };
+            const s10 = {
+                alumniAssociation: document.getElementById('alumniSelect')?.value || '',
+                deptAlumniAssoc: document.getElementById('alumniSelectYesNo')?.value || '',
+                alumniActivities: tableToArray('table26_2', ['_sr', 'programme', 'date', 'purpose', 'alumniPresent']),
+                obituaries: tableToArray('table26', ['_sr', 'name']),
+                otherInfo: document.getElementById('otherInfoText')?.value || '',
+                hodName: document.getElementById('hodName')?.value || '',
+                hodDate: document.getElementById('hodDate')?.value || '',
+            };
+            return { academicYear, section1: s1, section2: s2, section3: s3, section4: s4, section5: s5, section6: s6, section7: s7, section8: s8, section9: s9, section10: s10 };
+        }
+
+        function tableToArray(tbodyId, keys) {
+            const tbody = document.getElementById(tbodyId); if (!tbody) return [];
+            const rows = [];
+            tbody.querySelectorAll('tr').forEach(tr => {
+                const obj = {}; const tds = tr.querySelectorAll('td');
+                keys.forEach((key, i) => {
+                    if (key.startsWith('_')) return;
+                    const td = tds[i]; if (!td) return;
+                    const el = td.querySelector('input,select,textarea');
+                    const raw = el ? el.value : td.innerText.trim();
+                    const numFields = ['open', 'sc', 'st', 'ntdt', 'obc', 'sbc', 'year1', 'year2', 'year3', 'year4', 'total', 'studentsReceiving', 'totalAmount', 'noOfParticipants', 'noOfFaculty', 'ug', 'pg', 'mphil', 'phd', 'intake', 'registered', 'awarded', 'grant', 'revenue', 'fellowshipAmount', 'finalYear', 'research', 'internship', 'moocs', 'noOfStudents', 'studentsPassed', 'orgVisited', 'studentsParticipated', 'placedOnCampus', 'placedOffCampus', 'amount', 'alumniPresent', 'totalCorpus', 'classroomArea', 'labArea'];
+                    obj[key] = numFields.includes(key) ? (parseFloat(raw) || 0) : raw;
+                });
+                if (Object.values(obj).some(v => v !== '' && v !== 0)) rows.push(obj);
+            });
+            return rows;
+        }
+
+        /* ── POPULATE FORM ── */
+        function populateForm(report) {
+            const setId = (id, val) => { const el = document.getElementById(id); if (el) el.value = val || ''; };
+            setId('academicYear', report.academicYear); updateYear(report.academicYear || '');
+            const s1 = report.section1 || {};
+            setId('s1_deptName', s1.departmentName); setId('s1_address', s1.address);
+            setId('s1_yearEstab', s1.yearOfEstablishment); setId('s1_hodName', s1.hodName);
+            setId('s1_hodInCharge', s1.hodInCharge); setId('s1_telephone', s1.telephone);
+            setId('s1_fax', s1.fax); setId('s1_email', s1.email); setId('s1_website', s1.website);
+            if (_deptName && _role !== 'admin') { const el = document.getElementById('s1_deptName'); if (el) el.readOnly = true; }
+            if (s1.programmes?.length) populateTable('programmeTable', s1.programmes, ['type', 'name', 'yearOfStarting', 'aidedUnaided'], addRowProgramme);
+            if (s1.infrastructure?.length) populateTable('infraTable', s1.infrastructure, ['classroom', 'classroomArea', 'lab', 'labArea'], addRowInfra);
+            if (s1.intakeCapacity?.length) populateTable('intakeTable', s1.intakeCapacity, ['programme', 'ug', 'pg', 'mphil', 'phd'], addRowIntake);
+            const s2 = report.section2 || {};
+            if (s2.categoryAdmission?.length) populateTableById('categoryAdmissionTable', s2.categoryAdmission, ['programme', 'open', 'sc', 'st', 'ntdt', 'obc', 'sbc']);
+            if (s2.scholarships?.length) populateTableById('scholarshipTable', s2.scholarships, ['_sr', 'name', 'studentsReceiving', 'organization', 'totalAmount']);
+            if (s2.faculty?.length) populateTableById('facultyTable', s2.faculty, ['_sr', 'name', 'qualification', 'subject', 'designation', 'natureOfAppointment', 'category', 'dateOfAppointment']);
+            if (s2.guestFaculty?.length) populateTableById('guestFacultyTable', s2.guestFaculty, ['_sr', 'name', 'positionDetails']);
+            if (s2.nonTeaching?.length) populateTableById('nonTeachingTable', s2.nonTeaching, ['_sr', 'name', 'designation', 'natureOfAppointment', 'dateOfAppointment', 'category']);
+            const s3 = report.section3 || {};
+            if (s3.organizedEvents?.length) populateTableById('sec3_table121', s3.organizedEvents, ['_sr', 'title', 'dateVenue', 'sponsoringAgency', 'noOfParticipants', 'level']);
+            if (s3.otherEvents?.length) populateTableById('sec3_table122', s3.otherEvents, ['_sr', 'title', 'dateVenue', 'sponsoringAgency', 'noOfParticipants', 'level']);
+            if (s3.facultyPapers?.length) populateTableById('sec3_table13', s3.facultyPapers, ['_sr', 'facultyName', 'paperTitle', 'conferenceTitle', 'dateVenueOrganizer', 'level', 'chaired']);
+            if (s3.facultyWorkshops?.length) populateTableById('sec3_table14', s3.facultyWorkshops, ['_sr', 'facultyName', 'workshopTitle', 'dateVenueOrganizer', 'level', 'resourcePerson']);
+            if (s3.facultyDevelopment?.length) populateTableById('facultyDevTable', s3.facultyDevelopment, ['programme', 'title', 'noOfFaculty', 'dates']);
+            const s4 = report.section4 || {};
+            if (s4.journalArticles?.length) populateTableById('table16_1', s4.journalArticles, ['_sr', 'authors', 'facultyStudent', 'title', 'journal', 'dateOfPublication', 'volumeISSN', 'peerReview']);
+            if (s4.books?.length) populateTableById('table16_2', s4.books, ['_sr', 'authors', 'facultyStudent', 'title', 'place', 'publisher', 'yearISBN']);
+            if (s4.chapters?.length) populateTableById('table16_3', s4.chapters, ['_sr', 'authors', 'facultyStudent', 'chapterTitle', 'bookTitle', 'place', 'publisher', 'yearISBN']);
+            if (s4.conferenceProceedings?.length) populateTableById('table16_4', s4.conferenceProceedings, ['_sr', 'authors', 'facultyStudent', 'paperTitle', 'conferenceName', 'publisherPlace', 'yearISBN', 'link']);
+            if (s4.otherPublications?.length) populateTableById('table16_5', s4.otherPublications, ['_sr', 'authors', 'facultyStudent', 'title', 'publisherPlace', 'yearISBN', 'link']);
+            const s5 = report.section5 || {};
+            if (s5.facultyResearch?.length) populateTableById('table17_1', s5.facultyResearch, ['_sr', 'facultyName', 'type', 'title', 'fundingAgency', 'duration', 'grant', 'status']);
+            if (s5.patents?.length) populateTableById('table17_2', s5.patents, ['_sr', 'teacherName', 'patentDetails', 'status', 'patentNumber', 'dateOfAward']);
+            if (s5.consultancy?.length) populateTableById('table17_3', s5.consultancy, ['_sr', 'consultantDept', 'teachers', 'projectName', 'agency', 'revenue']);
+            if (s5.studentResearch?.length) populateTableById('table17_4', s5.studentResearch, ['_sr', 'guideName', 'internalExternal', 'intake', 'registered', 'awarded']);
+            if (s5.phdStudents?.length) populateTableById('table17_5', s5.phdStudents, ['_sr', 'scholarName', 'guideName', 'dateOfRegistration', 'title', 'status', 'fellowshipType', 'fellowshipAmount']);
+            if (s5.pgDissertation?.length) populateTableById('table17_6', s5.pgDissertation, ['_sr', 'programName', 'finalYear', 'research', 'internship', 'moocs']);
+            if (s5.internships?.length) populateTableById('table17_7', s5.internships, ['_sr', 'orgName', 'type', 'paidUnpaid', 'noOfStudents']);
+            const s6 = report.section6 || {};
+            if (s6.studentAwards?.length) populateTableById('table18_1', s6.studentAwards, ['_sr', 'studentName', 'awardTitle', 'organization', 'purpose', 'date']);
+            if (s6.facultyAwards?.length) populateTableById('table18_2', s6.facultyAwards, ['_sr', 'facultyName', 'awardTitle', 'organization', 'purpose', 'date']);
+            if (s6.competitiveExams?.length) populateTableById('table19_1', s6.competitiveExams, ['_sr', 'exam', 'studentsPassed']);
+            const s7 = report.section7 || {};
+            if (s7.studyVisits?.length) populateTableById('table20_1', s7.studyVisits, ['_sr', 'year', 'place', 'faculty', 'purpose', 'date']);
+            if (s7.domesticVisitors?.length) populateTableById('table20_2', s7.domesticVisitors, ['_sr', 'name', 'position', 'place', 'purpose', 'date']);
+            if (s7.intlVisitors?.length) populateTableById('table20_3', s7.intlVisitors, ['_sr', 'name', 'position', 'country', 'purpose', 'date']);
+            if (s7.socialInitiatives?.length) populateTableById('table21', s7.socialInitiatives, ['_sr', 'initiative', 'placeOrg', 'noOfStudents']);
+            if (s7.campusPlacement?.length) populateTableById('table22', s7.campusPlacement, ['_sr', 'orgVisited', 'studentsParticipated', 'placedOnCampus', 'placedOffCampus']);
+            const s8 = report.section8 || {};
+            setId('nssActivitiesText', s8.nssActivities); setId('teachingQualityText', s8.teachingQuality); setId('otherActivitiesText', s8.otherActivities);
+            if (s8.workshops?.length) populateTableById('table23_1', s8.workshops, ['_sr', 'title', 'date', 'venue', 'noOfStudents']);
+            const s9 = report.section9 || {};
+            if (s9.mous?.length) populateTableById('table24', s9.mous, ['_sr', 'institution', 'nationalIntl', 'collaboration']);
+            if (s9.donors?.length) populateTableById('table25', s9.donors, ['_sr', 'donorName', 'amount', 'purpose', 'date']);
+            setId('totalCorpusInput', s9.totalCorpus);
+            const s10 = report.section10 || {};
+            const alumniSel = document.getElementById('alumniSelect');
+            if (alumniSel) { alumniSel.value = s10.alumniAssociation || ''; toggleAlumni(alumniSel.value); }
+            setId('alumniSelectYesNo', s10.deptAlumniAssoc);
+            if (s10.alumniActivities?.length) populateTableById('table26_2', s10.alumniActivities, ['_sr', 'programme', 'date', 'purpose', 'alumniPresent']);
+            if (s10.obituaries?.length) populateTableById('table26', s10.obituaries, ['_sr', 'name']);
+            setId('otherInfoText', s10.otherInfo); setId('hodName', s10.hodName); setId('hodDate', s10.hodDate);
+            if (s10.hodSignatureBase64) {
+                const img = document.getElementById('sigPreviewImg');
+                if (img) { img.src = s10.hodSignatureBase64; img.style.display = 'block'; }
+                const ph = document.getElementById('sigPlaceholder'); if (ph) ph.style.display = 'none';
+            }
+        }
+
+        function populateTable(tableId, rows, keys, addRowFn) {
+            const tbody = document.querySelector('#' + tableId + ' tbody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            if (!rows || !rows.length) { addRowFn(); return; }
+            rows.forEach(rowData => {
+                addRowFn();
+                const tr = tbody.rows[tbody.rows.length - 1];
+                const tds = tr.querySelectorAll('td');
+                keys.forEach((key, i) => { const td = tds[i]; if (!td) return; const el = td.querySelector('input,select,textarea'); if (el) el.value = rowData[key] !== undefined ? rowData[key] : ''; });
+            });
+        }
+        function populateTableById(tbodyId, rows, keys) {
+            const tbody = document.getElementById(tbodyId);
+            if (!tbody || !rows?.length) return;
+            const template = tbody.rows[0].cloneNode(true);
+            template.querySelectorAll('input').forEach(i => { i.value = i.type === 'number' ? 0 : ''; });
+            template.querySelectorAll('select').forEach(s => s.selectedIndex = 0);
+            tbody.innerHTML = '';
+            rows.forEach((rowData, idx) => {
+                const newRow = template.cloneNode(true);
+                const tds = newRow.querySelectorAll('td');
+                let colIdx = 0;
+                keys.forEach(key => {
+                    if (key.startsWith('_')) { colIdx++; return; }
+                    const td = tds[colIdx]; colIdx++;
+                    if (!td) return;
+                    const el = td.querySelector('input,select,textarea');
+                    if (el) el.value = rowData[key] !== undefined ? rowData[key] : '';
+                });
+                const srTd = newRow.querySelector('.sr-td'); if (srTd) srTd.textContent = idx + 1;
+                tbody.appendChild(newRow);
+            });
+        }
+
+        /* ── SUBMIT ── */
+        async function submitReport() {
+            const data = collectData();
+            if (!data.academicYear) { showToast('Please enter the Academic Year first', 'error'); showSection('section1', 'nav-s1', 'Basic Department Details'); return; }
+            if (!data.section1.departmentName) { showToast('Please enter the Department Name in Section 1', 'error'); showSection('section1', 'nav-s1', 'Basic Department Details'); return; }
+            const btn = document.getElementById('btnSubmit');
+            if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving…'; }
+            const sigImg = document.getElementById('sigPreviewImg');
+            if (sigImg && sigImg.src && sigImg.style.display !== 'none' && sigImg.src.startsWith('data:')) {
+                data.section10 = data.section10 || {}; data.section10.hodSignatureBase64 = sigImg.src;
+            }
+            const payload = { ...data, submittedAt: new Date().toISOString() };
+            let savedToDB = false;
+            if (isOnline) {
+                try {
+                    const url = editingReportId ? `${API}/report/${editingReportId}` : `${API}/save-report`;
+                    const method = editingReportId ? 'PUT' : 'POST';
+                    const res = await fetch(url, { method, headers: authHeaders(), body: JSON.stringify(payload) });
+                    const result = await res.json();
+                    if (result.success) { savedToDB = true; editingReportId = result.id || editingReportId; }
+                    else throw new Error(result.error || 'Save failed');
+                } catch (err) { showToast('Error: ' + err.message, 'error'); }
+            }
+            if (!savedToDB) {
+                await idbPut('queue', { ...payload, queueId: Date.now(), status: 'pending' });
+                showToast('Saved offline — will sync when online', 'error');
+            } else {
+                showToast('Report saved to MongoDB ✅', 'success');
+                try { const dk = (data.academicYear + '_' + (data.section1?.departmentName || 'draft')).replace(/\s+/g, '_'); await idbDelete('drafts', dk); } catch (e) { }
+            }
+            if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Report'; }
+            if (savedToDB) {
+                document.getElementById('dlPopupTitle').textContent = editingReportId ? 'Updated Successfully! ✅' : 'Submitted Successfully! 🎉';
+                document.getElementById('dlPopupMsg').textContent = 'Report has been saved to the database.';
+                document.getElementById('dlPDFName').textContent = buildFileName() + '.pdf';
+                document.getElementById('downloadPopup').classList.add('open');
+            }
+        }
+
+        /* ── OFFLINE QUEUE ── */
+        async function syncOfflineQueue() {
+            if (!isOnline) return;
+            let queue = []; try { queue = await idbGetAll('queue'); } catch (e) { return; }
+            if (!queue.length) return;
+            let synced = 0;
+            for (const item of queue) {
+                try {
+                    const res = await fetch(`${API}/save-report`, { method: 'POST', headers: authHeaders(), body: JSON.stringify(item), signal: AbortSignal.timeout(6000) });
+                    const result = await res.json();
+                    if (result.success) { await idbDelete('queue', item.queueId); synced++; }
+                } catch (e) { }
+            }
+            if (synced > 0) { showToast(`${synced} report(s) synced ✅`, 'success'); loadDashboard(); }
+        }
+        async function renderOfflineQueue() {
+            const list = document.getElementById('offlineQueueList');
+            list.innerHTML = '<p style="color:var(--muted);font-size:0.83rem;padding:10px 0;">Loading…</p>';
+            let queue = []; try { queue = await idbGetAll('queue'); } catch (e) { }
+            list.innerHTML = '';
+            if (!queue.length) { list.innerHTML = '<div class="no-reports"><i class="fas fa-check-circle" style="font-size:2rem;color:var(--success);display:block;margin-bottom:8px;"></i>No pending reports.</div>'; return; }
+            queue.forEach(r => {
+                const row = document.createElement('div'); row.className = 'report-row';
+                row.innerHTML = `<div class="report-row-left"><div class="report-icon" style="background:#fff3cd;color:#e8a838;"><i class="fas fa-clock"></i></div><div><div class="report-year">AY ${r.academicYear}</div><div class="report-meta">${r.section1?.departmentName || 'Department'} · <span style="color:#e8a838;font-weight:600;">Pending sync</span></div></div></div>`;
+                list.appendChild(row);
+            });
+        }
+
+        /* ── FILENAME & PDF ── */
+        function buildFileName() {
+            const dept = (document.getElementById('s1_deptName')?.value || 'Department').trim().replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_\-]/g, '');
+            const year = (document.getElementById('academicYear')?.value || '').replace(/\s/g, '');
+            return `${dept}_${year}`;
+        }
+        function downloadPDF() {
+            showToast('Generating PDF…');
+            const year = document.getElementById('academicYear').value.replace('-', '–');
+            const dept = document.getElementById('s1_deptName')?.value || '';
+            const hod = document.getElementById('s1_hodName')?.value || '';
+            const sectionNames = ['Basic Department Details', 'Admission & Staff Details', 'Events & Participation', 'Publications & Research', 'Research Projects', 'Awards & Exams', 'Study Visits & Visitors', 'Department Activities', 'MOUs & Donors', 'Alumni Association'];
+            const sectionColors = ['#4f6ef7', '#22c98a', '#e8a838', '#e85a5a', '#9b59b6', '#f39c12', '#2ecc71', '#e74c3c', '#3498db', '#1abc9c'];
+            const wrap = document.createElement('div');
+            wrap.style.cssText = 'font-family:Arial,sans-serif;font-size:11px;color:#111;padding:8px;';
+            wrap.innerHTML = `<div style="text-align:center;background:#1a1f2e;color:#fff;padding:28px 20px;border-radius:10px;margin-bottom:24px;"><div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#a0b4ff;margin-bottom:8px;">SNDT Women's University · Annual Report</div><div style="font-size:24px;font-weight:700;margin-bottom:6px;">Annual Report</div><div style="font-size:16px;color:#e8a838;font-weight:600;margin-bottom:6px;">Academic Year ${year}</div>${dept ? `<div style="font-size:12px;color:rgba(255,255,255,0.7);">${dept}</div>` : ''}${hod ? `<div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:4px;">HOD: ${hod}</div>` : ''}</div>`;
+            for (let i = 1; i <= 10; i++) {
+                const sec = document.getElementById('section' + i); if (!sec) continue;
+                const clone = sec.cloneNode(true);
+                clone.querySelectorAll('.section-navigation,button,.add-row-btn,.upload-zone,.year-banner,.section-header').forEach(el => el.remove());
+                const color = sectionColors[i - 1];
+                const secDiv = document.createElement('div'); secDiv.style.cssText = 'page-break-inside:avoid;margin-bottom:20px;';
+                const secHead = document.createElement('div'); secHead.style.cssText = `background:#1a1f2e;color:#fff;padding:9px 14px;border-radius:7px 7px 0 0;font-size:12px;font-weight:700;border-left:5px solid ${color};`; secHead.innerHTML = `<span style="background:${color};color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;margin-right:8px;">${i}</span>${sectionNames[i - 1]}`;
+                clone.querySelectorAll('h3,h4').forEach(h => { h.style.cssText = `font-size:10px;font-weight:700;color:#1a1f2e;padding:5px 9px;background:#f0f2f8;border-left:3px solid ${color};margin:8px 0 5px;`; });
+                clone.querySelectorAll('textarea').forEach(ta => { const p = document.createElement('p'); p.style.cssText = 'font-size:10px;padding:5px 9px;background:#fafbff;border:1px solid #e2e6f0;border-radius:4px;margin:3px 0 7px;line-height:1.55;'; p.textContent = ta.value || '—'; ta.parentNode.replaceChild(p, ta); });
+                clone.querySelectorAll('table').forEach(tbl => {
+                    tbl.style.cssText = 'width:100%;border-collapse:collapse;margin:4px 0 10px;font-size:9.5px;';
+                    tbl.querySelectorAll('thead th').forEach(th => { th.style.cssText = 'background:#1a1f2e;color:#fff;padding:5px 7px;text-align:left;border:1px solid #2d3561;font-size:9px;font-weight:700;'; });
+                    tbl.querySelectorAll('tbody tr').forEach((tr, ri) => { tr.querySelectorAll('td').forEach(td => { td.style.cssText = `padding:4px 7px;border:1px solid #dde1ef;vertical-align:middle;font-size:9.5px;background:${ri % 2 === 0 ? '#fff' : '#f5f7ff'};`; }); });
+                    tbl.querySelectorAll('input').forEach(inp => { const s = document.createElement('span'); s.textContent = inp.value || '—'; inp.parentNode.replaceChild(s, inp); });
+                    tbl.querySelectorAll('select').forEach(sel => { const s = document.createElement('span'); s.textContent = sel.options[sel.selectedIndex]?.text || '—'; sel.parentNode.replaceChild(s, sel); });
+                });
+                clone.style.cssText = 'display:block;padding:10px 12px;background:#fff;border:1px solid #dde1ef;border-top:none;border-radius:0 0 7px 7px;';
+                secDiv.appendChild(secHead); secDiv.appendChild(clone); wrap.appendChild(secDiv);
+            }
+            const footer = document.createElement('div'); footer.style.cssText = 'text-align:center;margin-top:20px;padding:12px;background:#f0f2f8;border-radius:8px;font-size:9px;color:#6b7399;'; footer.textContent = `Generated ${new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'long', year: 'numeric' })} · SNDT Women's University`; wrap.appendChild(footer);
+            html2pdf().set({ margin: [10, 8, 10, 8], filename: buildFileName() + '.pdf', html2canvas: { scale: 2, useCORS: true, logging: false }, jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' } }).from(wrap).save().then(() => showToast('PDF downloaded ✅', 'success'));
+        }
+
+        /* ── LOGOUT ── */
+        function doLogout() { localStorage.clear(); window.location.href = 'login.html'; }
+
+        /* ── INIT ── */
+        window.addEventListener('load', async () => {
+            if (isOnline) setTimeout(syncOfflineQueue, 2000);
+            updateOfflineBanner();
+            addRowProgramme(); addRowInfra(); addRowIntake();
+            const editId = sessionStorage.getItem('sndt_edit_id');
+            if (editId) { sessionStorage.removeItem('sndt_edit_id'); showDashboard(); await editReport(editId); return; }
+            showDashboard();
+            loadDashboard();
+            if (_deptName) document.getElementById('dashSubtitle').textContent = `Department: ${_deptName} — view, edit or create your annual reports`;
+        });
+    </script>
+</body>
+
+</html>
