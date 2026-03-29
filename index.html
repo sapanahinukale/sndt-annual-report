@@ -3457,6 +3457,7 @@
                 editingReportId = id;
                 resetForm();
                 populateForm(data.report);
+                document.getElementById('dashSection').style.display = 'none';
                 showFormNav();
                 showSection('section1', 'nav-s1', 'Basic Department Details');
                 showToast('Report loaded ✅', 'success');
@@ -3492,22 +3493,25 @@
             ['s1_deptName', 's1_address', 's1_yearEstab', 's1_hodName', 's1_hodInCharge', 's1_telephone', 's1_fax', 's1_email', 's1_website'].forEach(id => {
                 const el = document.getElementById(id); if (el) { el.value = ''; el.readOnly = false; }
             });
-            ['programmeTable', 'infraTable', 'intakeTable'].forEach(id => {
-                const t = document.getElementById(id); if (t) t.querySelector('tbody').innerHTML = '';
-            });
-            addRowProgramme(); addRowInfra(); addRowIntake();
-            ['categoryAdmissionTable', 'yearAdmissionTable', 'scholarshipTable', 'facultyTable', 'guestFacultyTable', 'nonTeachingTable',
-                'sec3_table121', 'sec3_table122', 'sec3_table13', 'sec3_table14',
+            // Clear all table bodies completely
+            ['programmeTable', 'infraTable', 'intakeTable',
+                'categoryAdmissionTable', 'yearAdmissionTable', 'scholarshipTable', 'facultyTable', 'guestFacultyTable', 'nonTeachingTable',
+                'sec3_table121', 'sec3_table122', 'sec3_table13', 'sec3_table14', 'facultyDevTable',
                 'table16_1', 'table16_2', 'table16_3', 'table16_4', 'table16_5',
                 'table17_1', 'table17_2', 'table17_3', 'table17_4', 'table17_5', 'table17_6', 'table17_7',
                 'table18_1', 'table18_2', 'table19_1',
                 'table20_1', 'table20_2', 'table20_3', 'table21', 'table22', 'table23_1',
                 'table24', 'table25', 'table26', 'table26_2'].forEach(id => {
                     const el = document.getElementById(id);
-                    if (el) el.querySelectorAll('input,select,textarea').forEach(i => { i.value = i.type === 'number' ? 0 : ''; });
+                    if (el) el.innerHTML = '';
                 });
+            addRowProgramme(); addRowInfra(); addRowIntake();
             ['nssActivitiesText', 'teachingQualityText', 'otherActivitiesText', 'otherInfoText'].forEach(id => {
                 const el = document.getElementById(id); if (el) el.value = '';
+            });
+            // Clear image previews
+            ['previewContainer122', 'nssPreview', 'otherPreview'].forEach(id => {
+                const el = document.getElementById(id); if (el) el.innerHTML = '';
             });
             const tc = document.getElementById('totalCorpusInput'); if (tc) tc.value = 0;
             const asel = document.getElementById('alumniSelect'); if (asel) asel.value = '';
@@ -3539,9 +3543,32 @@
             tr.innerHTML = `<td><input type="text" placeholder="Enter Programme Name"></td><td><input type="number" value="0"></td><td><input type="number" value="0"></td><td><input type="number" value="0"></td><td><input type="number" value="0"></td><td><button type="button" class="btn-danger-soft delete-row">Delete</button></td>`;
             tbody.appendChild(tr);
         }
+        // ── TABLE TEMPLATES (saved on page load, before any clearing) ──
+        const _tableTemplates = {};
+        function saveTableTemplates() {
+            ['categoryAdmissionTable', 'yearAdmissionTable', 'scholarshipTable', 'facultyTable', 'guestFacultyTable', 'nonTeachingTable',
+                'sec3_table121', 'sec3_table122', 'sec3_table13', 'sec3_table14', 'facultyDevTable',
+                'table16_1', 'table16_2', 'table16_3', 'table16_4', 'table16_5',
+                'table17_1', 'table17_2', 'table17_3', 'table17_4', 'table17_5', 'table17_6', 'table17_7',
+                'table18_1', 'table18_2', 'table19_1',
+                'table20_1', 'table20_2', 'table20_3', 'table21', 'table22', 'table23_1',
+                'table24', 'table25', 'table26', 'table26_2'].forEach(id => {
+                const tbody = document.getElementById(id);
+                if (tbody && tbody.rows.length > 0) {
+                    const tpl = tbody.rows[0].cloneNode(true);
+                    tpl.querySelectorAll('input').forEach(i => { i.value = i.type === 'number' ? 0 : ''; });
+                    tpl.querySelectorAll('select').forEach(s => s.selectedIndex = 0);
+                    _tableTemplates[id] = tpl;
+                }
+            });
+        }
+
         function addRowClone(tbodyId) {
             const tbody = document.getElementById(tbodyId); if (!tbody) return;
-            const newRow = tbody.rows[0].cloneNode(true);
+            const tpl = _tableTemplates[tbodyId];
+            const src = (tbody.rows.length > 0) ? tbody.rows[0] : tpl;
+            if (!src) return;
+            const newRow = src.cloneNode(true);
             newRow.querySelectorAll('input').forEach(inp => { if (!inp.hasAttribute('readonly')) inp.value = inp.type === 'number' ? 0 : ''; });
             newRow.querySelectorAll('select').forEach(sel => sel.selectedIndex = 0);
             const sr = newRow.cells[0]; if (sr && !sr.querySelector('input,select')) sr.textContent = tbody.rows.length + 1;
@@ -3550,7 +3577,10 @@
         function addRowCloneById(tableId) {
             const table = document.getElementById(tableId); if (!table) return;
             const tbody = table.querySelector('tbody');
-            const newRow = tbody.rows[0].cloneNode(true);
+            const tpl = _tableTemplates[tbody.id] || _tableTemplates[tableId];
+            const src = (tbody.rows.length > 0) ? tbody.rows[0] : tpl;
+            if (!src) return;
+            const newRow = src.cloneNode(true);
             newRow.querySelectorAll('input').forEach(inp => { if (!inp.hasAttribute('readonly')) inp.value = inp.type === 'number' ? 0 : ''; });
             newRow.querySelectorAll('select').forEach(sel => sel.selectedIndex = 0);
             const sr = newRow.cells[0]; if (sr && !sr.querySelector('input,select')) sr.textContent = tbody.rows.length + 1;
@@ -3841,9 +3871,9 @@
         function populateTableById(tbodyId, rows, keys) {
             const tbody = document.getElementById(tbodyId);
             if (!tbody || !rows?.length) return;
-            const template = tbody.rows[0].cloneNode(true);
-            template.querySelectorAll('input').forEach(i => { i.value = i.type === 'number' ? 0 : ''; });
-            template.querySelectorAll('select').forEach(s => s.selectedIndex = 0);
+            const tpl = _tableTemplates[tbodyId];
+            if (!tpl) return;
+            const template = tpl.cloneNode(true);
             tbody.innerHTML = '';
             rows.forEach((rowData, idx) => {
                 const newRow = template.cloneNode(true);
@@ -3975,8 +4005,13 @@
             if (isOnline) setTimeout(syncOfflineQueue, 2000);
             updateOfflineBanner();
             addRowProgramme(); addRowInfra(); addRowIntake();
+            saveTableTemplates();
             const editId = sessionStorage.getItem('sndt_edit_id');
-            if (editId) { sessionStorage.removeItem('sndt_edit_id'); showDashboard(); await editReport(editId); return; }
+            if (editId) {
+                sessionStorage.removeItem('sndt_edit_id');
+                await editReport(editId);
+                return;
+            }
             showDashboard();
             loadDashboard();
             if (_deptName) document.getElementById('dashSubtitle').textContent = `Department: ${_deptName} — view, edit or create your annual reports`;
