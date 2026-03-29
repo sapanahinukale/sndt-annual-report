@@ -1283,9 +1283,9 @@
       <td style="color:var(--muted);font-size:0.79rem;">${fmtDate(r.updatedAt || r.submittedAt)}</td>
       <td onclick="event.stopPropagation()">
         <div class="acts">
-          <button class="btn btn-outline btn-sm" onclick="viewReport('${r._id}')"><i class="fas fa-eye"></i> View</button>
-          <button class="btn btn-primary btn-sm" onclick="openEdit('${r._id}')"><i class="fas fa-edit"></i> Edit</button>
-          <button class="btn btn-danger btn-sm" onclick="confirmDel('${r._id}','${dept.replace(/'/g, "\\'")}')"><i class="fas fa-trash"></i></button>
+          <button class="btn btn-outline btn-sm" onclick="event.stopPropagation();viewReport('${r._id}')"><i class="fas fa-eye"></i> View</button>
+          <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();openEdit('${r._id}')"><i class="fas fa-edit"></i> Edit</button>
+          <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();confirmDel('${r._id}','${dept.replace(/'/g, "\\'")}')"><i class="fas fa-trash"></i></button>
         </div>
       </td>
     </tr>`;

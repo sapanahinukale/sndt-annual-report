@@ -1964,7 +1964,7 @@
                         class="fas fa-plus"></i> Add Row</button>
 
                 <div class="upload-zone">
-                    <input type="file" id="fileInput122" multiple>
+                    <input type="file" id="fileInput122" multiple onchange="previewFiles(event,'previewContainer122')">
                     <span class="upload-icon-big"><i class="fas fa-cloud-upload-alt"></i></span>
                     <div class="upload-title">Click or drag &amp; drop files here</div>
                     <div class="upload-hint">Images · PDF · Word — max 512 KB each</div>
@@ -3630,6 +3630,25 @@
         function closeOfflinePanel() { document.getElementById('offlinePanel').classList.remove('open'); }
 
         /* ── COLLECT DATA ── */
+        /* ── COLLECT IMAGES FROM PREVIEW CONTAINER ── */
+        function collectImages(previewId) {
+            const container = document.getElementById(previewId);
+            if (!container) return [];
+            const imgs = container.querySelectorAll('img');
+            return Array.from(imgs).map(img => img.src).filter(src => src && src.startsWith('data:'));
+        }
+
+        function restoreImages(previewId, images) {
+            const container = document.getElementById(previewId);
+            if (!container || !images?.length) return;
+            images.forEach(src => {
+                const wrap = document.createElement('div');
+                wrap.className = 'img-preview-wrap';
+                wrap.innerHTML = `<img src="${src}" alt=""><button class="chip-del" onclick="this.parentElement.remove()">✕</button>`;
+                container.appendChild(wrap);
+            });
+        }
+
         function collectData() {
             const academicYear = document.getElementById('academicYear')?.value || '';
             const s1 = {
@@ -3657,6 +3676,7 @@
             const s3 = {
                 organizedEvents: tableToArray('sec3_table121', ['_sr', 'title', 'dateVenue', 'sponsoringAgency', 'noOfParticipants', 'level']),
                 otherEvents: tableToArray('sec3_table122', ['_sr', 'title', 'dateVenue', 'sponsoringAgency', 'noOfParticipants', 'level']),
+                otherEventsImages: collectImages('previewContainer122'),
                 facultyPapers: tableToArray('sec3_table13', ['_sr', 'facultyName', 'paperTitle', 'conferenceTitle', 'dateVenueOrganizer', 'level', 'chaired']),
                 facultyWorkshops: tableToArray('sec3_table14', ['_sr', 'facultyName', 'workshopTitle', 'dateVenueOrganizer', 'level', 'resourcePerson']),
                 facultyDevelopment: tableToArray('facultyDevTable', ['programme', 'title', 'noOfFaculty', 'dates']),
@@ -3692,8 +3712,10 @@
             const s8 = {
                 workshops: tableToArray('table23_1', ['_sr', 'title', 'date', 'venue', 'noOfStudents']),
                 nssActivities: document.getElementById('nssActivitiesText')?.value || '',
+                nssImages: collectImages('nssPreview'),
                 teachingQuality: document.getElementById('teachingQualityText')?.value || '',
                 otherActivities: document.getElementById('otherActivitiesText')?.value || '',
+                otherActivitiesImages: collectImages('otherPreview'),
             };
             const s9 = {
                 mous: tableToArray('table24', ['_sr', 'institution', 'nationalIntl', 'collaboration']),
@@ -3745,6 +3767,7 @@
             if (s1.intakeCapacity?.length) populateTable('intakeTable', s1.intakeCapacity, ['programme', 'ug', 'pg', 'mphil', 'phd'], addRowIntake);
             const s2 = report.section2 || {};
             if (s2.categoryAdmission?.length) populateTableById('categoryAdmissionTable', s2.categoryAdmission, ['programme', 'open', 'sc', 'st', 'ntdt', 'obc', 'sbc']);
+            if (s2.yearAdmission?.length) populateTableById('yearAdmissionTable', s2.yearAdmission, ['degree', 'programme', 'year1', 'year2', 'year3', 'year4', 'total']);
             if (s2.scholarships?.length) populateTableById('scholarshipTable', s2.scholarships, ['_sr', 'name', 'studentsReceiving', 'organization', 'totalAmount']);
             if (s2.faculty?.length) populateTableById('facultyTable', s2.faculty, ['_sr', 'name', 'qualification', 'subject', 'designation', 'natureOfAppointment', 'category', 'dateOfAppointment']);
             if (s2.guestFaculty?.length) populateTableById('guestFacultyTable', s2.guestFaculty, ['_sr', 'name', 'positionDetails']);
@@ -3752,6 +3775,7 @@
             const s3 = report.section3 || {};
             if (s3.organizedEvents?.length) populateTableById('sec3_table121', s3.organizedEvents, ['_sr', 'title', 'dateVenue', 'sponsoringAgency', 'noOfParticipants', 'level']);
             if (s3.otherEvents?.length) populateTableById('sec3_table122', s3.otherEvents, ['_sr', 'title', 'dateVenue', 'sponsoringAgency', 'noOfParticipants', 'level']);
+            if (s3.otherEventsImages?.length) restoreImages('previewContainer122', s3.otherEventsImages);
             if (s3.facultyPapers?.length) populateTableById('sec3_table13', s3.facultyPapers, ['_sr', 'facultyName', 'paperTitle', 'conferenceTitle', 'dateVenueOrganizer', 'level', 'chaired']);
             if (s3.facultyWorkshops?.length) populateTableById('sec3_table14', s3.facultyWorkshops, ['_sr', 'facultyName', 'workshopTitle', 'dateVenueOrganizer', 'level', 'resourcePerson']);
             if (s3.facultyDevelopment?.length) populateTableById('facultyDevTable', s3.facultyDevelopment, ['programme', 'title', 'noOfFaculty', 'dates']);
@@ -3782,6 +3806,8 @@
             const s8 = report.section8 || {};
             setId('nssActivitiesText', s8.nssActivities); setId('teachingQualityText', s8.teachingQuality); setId('otherActivitiesText', s8.otherActivities);
             if (s8.workshops?.length) populateTableById('table23_1', s8.workshops, ['_sr', 'title', 'date', 'venue', 'noOfStudents']);
+            if (s8.nssImages?.length) restoreImages('nssPreview', s8.nssImages);
+            if (s8.otherActivitiesImages?.length) restoreImages('otherPreview', s8.otherActivitiesImages);
             const s9 = report.section9 || {};
             if (s9.mous?.length) populateTableById('table24', s9.mous, ['_sr', 'institution', 'nationalIntl', 'collaboration']);
             if (s9.donors?.length) populateTableById('table25', s9.donors, ['_sr', 'donorName', 'amount', 'purpose', 'date']);
