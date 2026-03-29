@@ -220,13 +220,12 @@
       <i class="fas fa-sign-in-alt"></i> Sign In
     </button>
 
-    <div class="hint">
-      Admin default: <strong>admin</strong> / <strong>admin123</strong>
-    </div>
+  
   </div>
 
   <script>
     const BASE_URL = "https://sndt-annual-report-2.onrender.com";
+    const API = BASE_URL;
 
     // If already logged in, redirect
     const existing = localStorage.getItem('sndt_token');
@@ -260,7 +259,7 @@
       btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in…';
 
       try {
-        const res = await fetch(`${API}/login`, {
+        const res = await fetch(`${API}/api/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username, password })
