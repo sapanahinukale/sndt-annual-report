@@ -82,7 +82,7 @@ mongoose.connection.once('open', async () => {
   try {
     const exists = await User.findOne({ role: 'admin' });
     if (!exists) {
-      await User.create({ username: 'admin', password: 'admin123', role: 'admin', deptName: 'Administration' });
+      await User.create({ username: 'xyz', password: 'xyz', role: 'admin', deptName: 'Administration' });
       console.log('✅ Default admin created  →  username: admin  |  password: admin123');
     }
   } catch(e) { /* already seeded */ }
