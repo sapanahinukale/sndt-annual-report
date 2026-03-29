@@ -9,17 +9,13 @@ const express  = require('express');
 const mongoose = require('mongoose');
 const cors     = require('cors');
 const path     = require('path');
-const cors = require("cors"); // ✅ import CORS
-
-// ✅ enable CORS for all routes
-app.use(cors());
 
 
 const app  = express();
 const PORT = process.env.PORT || 3001;
 
 // ─── Middleware ──────────────────────────────────────────────────
-app.use(cors({ origin: '*' }));
+app.use(cors()); // enable CORS for all routes
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(express.static(path.join(__dirname)));
@@ -32,7 +28,7 @@ mongoose.connect(MONGO_URI, {
   serverSelectionTimeoutMS: 15000,
   socketTimeoutMS: 45000,
 })
-  .then(() => console.log('✅ MongoDB Atlas connected'))
+  .then(() => console.log('✅ MongoDB connected'))
   .catch(err => { console.error('❌ MongoDB error:', err.message); process.exit(1); });
 
 mongoose.connection.on('disconnected', () => console.warn('⚠️  MongoDB disconnected — retrying…'));
