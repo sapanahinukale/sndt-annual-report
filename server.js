@@ -9,6 +9,11 @@ const express  = require('express');
 const mongoose = require('mongoose');
 const cors     = require('cors');
 const path     = require('path');
+const cors = require("cors"); // ✅ import CORS
+
+// ✅ enable CORS for all routes
+app.use(cors());
+
 
 const app  = express();
 const PORT = process.env.PORT || 3001;
